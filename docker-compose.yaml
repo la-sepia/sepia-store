@@ -14,10 +14,8 @@ services:
         volumes:
             - chroma-data:/chroma/chroma
         ports:
-            - "8001:8001"
-        environment:
-            - CHROMA_HOST_PORT=8001
-            - CHROMA_HOST_ADDR=0.0.0.0
+        - "8001:8001"
+        command: "--workers 1 --host 0.0.0.0 --port 8001 --proxy-headers --timeout-keep-alive 30"
 
 
 volumes:
