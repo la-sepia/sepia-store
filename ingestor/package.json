@@ -1,0 +1,17 @@
+{
+  "name": "ingestor",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node src/main.js"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2",
+    "vite": "^5.3.4"
+  },
+  "dependencies": {
+    "chromadb": "^1.8.1",
+    "chromadb-default-embed": "^2.13.2"
+  }
+}
