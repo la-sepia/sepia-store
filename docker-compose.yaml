@@ -10,13 +10,12 @@ services:
             - POSTGRES_HOST_AUTH_METHOD=trust
     chromadb:
         restart: no
+        platform: linux/amd64
         image: chromadb/chroma:latest
         volumes:
             - chroma-data:/chroma/chroma
         ports:
-        - "8001:8001"
-        command: "--workers 1 --host 0.0.0.0 --port 8001 --proxy-headers --timeout-keep-alive 30"
-
+        - "8000:8000"
 
 volumes:
     data:
