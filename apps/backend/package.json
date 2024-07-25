@@ -13,7 +13,7 @@
     "medusa"
   ],
   "scripts": {
-    "clean": "cross-env ./node_modules/.bin/rimraf dist",
+    "clean": "cross-env rimraf dist",
     "build": "cross-env pnpm run --filter backend clean && pnpm run --filter backend build:server && pnpm run --filter backend build:admin",
     "build:server": "cross-env pnpm run --filter backend clean && tsc -p tsconfig.server.json",
     "build:admin": "cross-env medusa-admin build",
