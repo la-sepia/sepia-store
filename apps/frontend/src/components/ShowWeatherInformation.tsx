@@ -1,6 +1,23 @@
+"use client"
+
+import { useRouter } from "next/navigation"
+
 import { Message, ToolInvocation } from "ai"
+import { useEffect } from "react"
 
 export const ShowWeatherInformation = ({ message }: { message: Message }) => {
+  const router = useRouter()
+
+  const id = message.toolInvocations?.map(
+    (toolInvocation: ToolInvocation) => toolInvocation.args?.id
+  )[0]
+
+  useEffect(() => {
+    if (id) {
+      router.push(`/us/products/${id}`)
+    }
+  }, [id])
+
   return (
     <div className="flex gap-3 my-4 text-gray-600 text-sm">
       <span className="relative flex shrink-0 overflow-hidden rounded-full w-8 h-8">
@@ -33,6 +50,7 @@ export const ShowWeatherInformation = ({ message }: { message: Message }) => {
               className="p-4 my-2 text-gray-500 border border-gray-300 rounded"
             >
               <h4 className="mb-2">{args?.id ?? ""}</h4>
+              <span>{args?.extendedDescription ?? ""}</span>
             </div>
           )
         }

@@ -5,6 +5,7 @@ import { ChromaClient, OpenAIEmbeddingFunction } from "chromadb"
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30
+export const runtime = "nodejs"
 
 export async function POST(req: Request) {
   const { messages } = await req.json()
@@ -47,30 +48,52 @@ export async function POST(req: Request) {
       getClothesInformation: {
         description:
           "return the most suitable piece of clothing based on the user request",
-        parameters: z.object({ piece: z.string() }),
+        parameters: z.object({
+          piece: z
+            .string()
+            .describe(
+              "The name of the piece of clothing suggested to the client"
+            ),
+        }),
         execute: async ({ piece }: { piece: string }) => {
-          const embeddingFunction = new OpenAIEmbeddingFunction({
-            openai_api_key:
-              "sk-proj-YSKiIcXYgVC8H4eaMdWqT3BlbkFJHVnuURnmaYc1yaR5GANO",
-            openai_model: "text-embedding-3-small",
+          console.debug("getClothesInformation", piece)
+          // const embeddingFunction = new OpenAIEmbeddingFunction({
+          //   openai_api_key:
+          //     "sk-proj-YSKiIcXYgVC8H4eaMdWqT3BlbkFJHVnuURnmaYc1yaR5GANO",
+          //   openai_model: "text-embedding-3-small",
+          // })
+
+          const { embedding } = await embed({
+            model: openai.embedding("text-embedding-3-small"),
+            value: piece,
           })
 
-          const client = new ChromaClient({
-            path: "http://localhost:8000",
-          })
+          console.debug("SERGIO", embedding)
 
-          const collection = await client.getOrCreateCollection({
-            name: "products",
-            metadata: {
-              description: "Products of medusa store",
-            },
-            embeddingFunction,
-          })
+          const response = await fetch(
+            "http://localhost:8000/api/v1/collections/2c57aab6-3a55-4d51-97c9-a28acb9883f2/query",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                where: {},
+                where_document: {},
+                n_results: 1,
+                query_embeddings: [embedding],
+                include: ["metadatas", "documents", "distances"],
+              }),
+            }
+          )
 
-          const result = await collection.query({
-            queryTexts: piece,
-            nResults: 1,
-          })
+          const result = await response.json()
+
+          console.debug("SERGIO", result)
+
+          if (!response.ok) {
+            new Error()
+          }
 
           const id = result.ids[0][0]
           const document = result.documents[0][0]
