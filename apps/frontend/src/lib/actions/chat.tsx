@@ -26,7 +26,7 @@ const WeatherComponent = (props: WeatherProps) => (
 
 export async function streamComponent() {
   const result = await streamUI({
-    model: openai("gpt-4o"),
+    model: openai("gpt-4o-mini"),
     prompt: "Get the weather for San Francisco",
     text: ({ content }) => <div>{content}</div>,
     tools: {
