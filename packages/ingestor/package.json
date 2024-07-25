@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "chromadb": "^1.8.1",
-    "chromadb-default-embed": "^2.13.2"
+    "chromadb-default-embed": "^2.13.2",
+    "openai": "^4.53.0"
   }
 }
