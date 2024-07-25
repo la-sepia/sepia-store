@@ -1,5 +1,5 @@
 {
-  "name": "medusa-starter-default",
+  "name": "backend",
   "version": "0.0.1",
   "description": "A starter for Medusa projects.",
   "author": "Medusa (https://medusajs.com)",
@@ -22,7 +22,8 @@
     "seed": "cross-env medusa seed -f ./data/seed.json",
     "start": "cross-env pnpm run build && medusa start",
     "start:custom": "cross-env pnpm run build && node --preserve-symlinks --trace-warnings index.js",
-    "dev": "medusa develop"
+    "dev": "cross-env medusa develop",
+    "migrations": "cross-env medusa migrations run"
   },
   "dependencies": {
     "@medusajs/admin": "^7.1.15",
