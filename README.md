@@ -2,6 +2,28 @@
 
 ## Installation
 
+### Install dependencies
+
+```
+pnpm install
+```
+
+### Configure the projects
+
+Remember to copy and fill the templates with the OPENAI token (in both projects):
+
+#### Backend
+
+```
+cp apps/backend/.env.template apps/backend/.env
+```
+
+#### Frontend
+
+```
+cp apps/frontend/.env.template apps/frontend/.env.local
+```
+
 ### Run docker services
 
 ```
@@ -12,12 +34,6 @@ docker compose up -d
 
 ```
 docker compose exec -ti pgsql createdb -U postgres medusa-9ugN
-```
-
-### Run migrations
-
-```
-pnpm run --filter backend migrations
 ```
 
 ### Load example database
@@ -38,5 +54,5 @@ pnpm run dev
 
 * Frontend: http://localhost:3000/
 * Backend: http://localhost:7001/
-    * Username: `admin@medusa-test.com`
-    * Password: `supersecret`
+    * Username: `admin@example.com`
+    * Password: `admin`
