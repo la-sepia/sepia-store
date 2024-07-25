@@ -57,7 +57,7 @@ importers:
         version: 4.22.0(react-dom@18.3.1)(react@18.3.1)
       ai:
         specifier: ^3.2.32
-        version: 3.2.34(react@18.3.1)(svelte@4.2.18)(vue@3.4.33)(zod@3.23.8)
+        version: 3.2.34(openai@4.53.0)(react@18.3.1)(svelte@4.2.18)(vue@3.4.33)(zod@3.23.8)
       body-parser:
         specifier: ^1.19.0
         version: 1.20.2
@@ -190,13 +190,19 @@ importers:
         version: 1.54.2
       ai:
         specifier: ^3.2.32
-        version: 3.2.34(react@18.3.1)(svelte@4.2.18)(vue@3.4.33)(zod@3.23.8)
+        version: 3.2.34(openai@4.53.0)(react@18.3.1)(svelte@4.2.18)(vue@3.4.33)(zod@3.23.8)
       algoliasearch:
         specifier: ^4.20.0
         version: 4.24.0
       axios:
         specifier: ^1.6.7
         version: 1.7.2
+      chromadb:
+        specifier: ^1.8.1
+        version: 1.8.1(openai@4.53.0)
+      chromadb-default-embed:
+        specifier: ^2.13.2
+        version: 2.13.2
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -206,6 +212,9 @@ importers:
       next:
         specifier: ^14.0.0
         version: 14.2.5(@babel/core@7.24.9)(@playwright/test@1.45.3)(react-dom@18.3.1)(react@18.3.1)
+      openai:
+        specifier: ^4.53.0
+        version: 4.53.0
       pg:
         specifier: ^8.11.3
         version: 8.12.0
@@ -443,7 +452,7 @@ packages:
       '@ai-sdk/provider-utils': 1.0.3(zod@3.23.8)
       '@ai-sdk/ui-utils': 0.0.18(zod@3.23.8)
       swrv: 1.0.4(vue@3.4.33)
-      vue: 3.4.33(typescript@4.9.5)
+      vue: 3.4.33(typescript@5.5.4)
     transitivePeerDependencies:
       - zod
     dev: false
@@ -7590,7 +7599,7 @@ packages:
     dependencies:
       '@vue/compiler-ssr': 3.4.33
       '@vue/shared': 3.4.33
-      vue: 3.4.33(typescript@4.9.5)
+      vue: 3.4.33(typescript@5.5.4)
     dev: false
 
   /@vue/shared@3.4.33:
@@ -7792,7 +7801,7 @@ packages:
       humanize-ms: 1.2.1
     dev: false
 
-  /ai@3.2.34(react@18.3.1)(svelte@4.2.18)(vue@3.4.33)(zod@3.23.8):
+  /ai@3.2.34(openai@4.53.0)(react@18.3.1)(svelte@4.2.18)(vue@3.4.33)(zod@3.23.8):
     resolution: {integrity: sha512-SvWBOqcPoorEz/3mjFhaEfv0zrNOdSx5VZ5bsbqiA8NaVJuX8RoRbm389hVrFQbNx/IsMoy/CXFuwWQbi/qbrA==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -7822,6 +7831,7 @@ packages:
       json-schema: 0.4.0
       jsondiffpatch: 0.6.0
       nanoid: 3.3.6
+      openai: 4.53.0
       react: 18.3.1
       secure-json-parse: 2.7.0
       sswr: 2.1.0(svelte@4.2.18)
@@ -16577,7 +16587,7 @@ packages:
     peerDependencies:
       vue: '>=3.2.26 < 4'
     dependencies:
-      vue: 3.4.33(typescript@4.9.5)
+      vue: 3.4.33(typescript@5.5.4)
     dev: false
 
   /symbol-tree@3.2.4:
@@ -17397,7 +17407,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
-  /vue@3.4.33(typescript@4.9.5):
+  /vue@3.4.33(typescript@5.5.4):
     resolution: {integrity: sha512-VdMCWQOummbhctl4QFMcW6eNtXHsFyDlX60O/tsSQuCcuDOnJ1qPOhhVla65Niece7xq/P2zyZReIO5mP+LGTQ==}
     peerDependencies:
       typescript: '*'
@@ -17410,7 +17420,7 @@ packages:
       '@vue/runtime-dom': 3.4.33
       '@vue/server-renderer': 3.4.33(vue@3.4.33)
       '@vue/shared': 3.4.33
-      typescript: 4.9.5
+      typescript: 5.5.4
     dev: false
 
   /w3c-hr-time@1.0.2:
