@@ -57,21 +57,34 @@ export async function POST(req: Request) {
         }),
         execute: async ({ piece }: { piece: string }) => {
           console.debug("getClothesInformation", piece)
-          // const embeddingFunction = new OpenAIEmbeddingFunction({
-          //   openai_api_key:
-          //     "sk-proj-YSKiIcXYgVC8H4eaMdWqT3BlbkFJHVnuURnmaYc1yaR5GANO",
-          //   openai_model: "text-embedding-3-small",
-          // })
 
           const { embedding } = await embed({
             model: openai.embedding("text-embedding-3-small"),
             value: piece,
           })
 
-          console.debug("SERGIO", embedding)
+          const collections = await fetch(
+            "http://localhost:8000/api/v1/collections/?tenant=default_tenant&database=default_database",
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          )
+
+          const collectionsX = await collections.json()
+
+          if (!collections.ok) {
+            throw new Error(collectionsX)
+          }
+
+          const collectionId = collectionsX
+            .filter((collection) => collection.name === "products")
+            .map((collection) => collection.id)[0]
 
           const response = await fetch(
-            "http://localhost:8000/api/v1/collections/2c57aab6-3a55-4d51-97c9-a28acb9883f2/query",
+            `http://localhost:8000/api/v1/collections/${collectionId}/query`,
             {
               method: "POST",
               headers: {
@@ -92,7 +105,7 @@ export async function POST(req: Request) {
           console.debug("SERGIO", result)
 
           if (!response.ok) {
-            new Error()
+            throw new Error(result)
           }
 
           const id = result.ids[0][0]

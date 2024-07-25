@@ -12,11 +12,9 @@ export const ShowWeatherInformation = ({ message }: { message: Message }) => {
     (toolInvocation: ToolInvocation) => toolInvocation.args?.id
   )[0]
 
-  useEffect(() => {
-    if (id) {
-      router.push(`/us/products/${id}`)
-    }
-  }, [id])
+  // if (id) {
+  //   router.push(`/us/products/${id}`)
+  // }
 
   return (
     <div className="flex gap-3 my-4 text-gray-600 text-sm">

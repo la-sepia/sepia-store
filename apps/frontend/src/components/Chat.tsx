@@ -6,13 +6,19 @@ import { ToolInvocation } from "ai"
 import { AssistantMessage } from "./AssistantMessage"
 import { UserMessage } from "./UserMessage"
 import { ShowWeatherInformation } from "./ShowWeatherInformation"
+import { useRouter } from "next/navigation"
 
 export const Chat = () => {
+  const router = useRouter()
+
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     maxToolRoundtrips: 5,
     async onToolCall({ toolCall }) {
       if (toolCall.toolName === "showClothesInformation") {
-        return "Piece of clothes information was shown to the user."
+        console.log("toolCall", toolCall)
+        const { id } = toolCall.args as { id: string }
+
+        router.push(`/us/products/${id}`)
       }
     },
   })
@@ -67,19 +73,17 @@ export const Chat = () => {
               maxHeight: "500px",
             }}
           >
-            {messages.toReversed().map(
-              (m) => {
-                if (!m.content && m.toolInvocations) {
-                  return <ShowWeatherInformation message={m} key={m.id} />
-                }
-
-                return m.role === "assistant" ? (
-                  <AssistantMessage message={m} key={m.id} />
-                ) : (
-                  <UserMessage message={m} key={m.id} />
-                )
+            {messages.toReversed().map((m) => {
+              if (!m.content && m.toolInvocations) {
+                return <ShowWeatherInformation message={m} key={m.id} />
               }
-            )}
+
+              return m.role === "assistant" ? (
+                <AssistantMessage message={m} key={m.id} />
+              ) : (
+                <UserMessage message={m} key={m.id} />
+              )
+            })}
           </div>
           <div className="flex items-center pt-0">
             <form
