@@ -1,24 +1,25 @@
 services:
-    pgsql:
-        restart: no
-        image: postgres:latest
-        volumes:
-            - data:/var/lib/postgresql/data
-        ports:
-            - 0.0.0.0:5432:5432
-        environment:
-            - POSTGRES_HOST_AUTH_METHOD=trust
-    chromadb:
-        restart: no
-        platform: linux/amd64
-        image: chromadb/chroma:latest
-        volumes:
-            - chroma-data:/chroma/chroma
-        ports:
-        - "8000:8000"
+  pgsql:
+    restart: no
+    image: pgvector/pgvector:pg16
+    volumes:
+      - data:/var/lib/postgresql/data
+    ports:
+      - 0.0.0.0:5432:5432
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+
+  chromadb:
+    restart: no
+    platform: linux/amd64
+    image: chromadb/chroma:latest
+    volumes:
+      - chroma-data:/chroma/chroma
+    ports:
+      - "8000:8000"
 
 volumes:
-    data:
-        driver: local
-    chroma-data:
-        driver: local
+  data:
+    driver: local
+  chroma-data:
+    driver: local
