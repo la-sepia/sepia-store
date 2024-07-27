@@ -3,14 +3,17 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "ingest": "node src/main.js"
+    "ingest": "tsx src/main.ts"
   },
   "devDependencies": {
-    "typescript": "^5.2.2"
+    "ts-node": "^10.9.2",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.4"
   },
   "dependencies": {
-    "chromadb": "^1.8.1",
-    "chromadb-default-embed": "^2.13.2",
-    "openai": "^4.53.0"
+    "@ai-sdk/openai": "^0.0.37",
+    "ai": "^3.2.32",
+    "drizzle-orm": "^0.32.1",
+    "postgres": "^3.4.4"
   }
 }
