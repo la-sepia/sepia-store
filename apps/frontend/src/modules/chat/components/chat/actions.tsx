@@ -7,8 +7,6 @@ import {
   streamUI,
 } from "ai/rsc"
 import { openai } from "@ai-sdk/openai"
-import { ReactNode } from "react"
-import { z } from "zod"
 import { generateId, nanoid } from "ai"
 import { ChatBotMessage, ChatSpinnerMessage } from "./chat-bot-message"
 
@@ -62,7 +60,7 @@ export async function submitUserMessage(content: string) {
           messages: [
             ...aiState.get().messages,
             {
-              id: nanoid(),
+              id: generateId(),
               role: "assistant",
               content,
             },
@@ -92,7 +90,11 @@ export type UIState = {
   display: React.ReactNode
 }[]
 
-export const AI = createAI<AIState, UIState>({
+export type UIActions = {
+  submitUserMessage: typeof submitUserMessage
+}
+
+export const AI = createAI<AIState, UIState, UIActions>({
   actions: {
     submitUserMessage,
   },
