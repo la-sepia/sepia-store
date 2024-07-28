@@ -1,8 +1,11 @@
-import { findRelevantContent } from "medusa-ui-sepia";
+import { Embeddings } from "medusa-ui-sepia";
 
 async function main() {
-  const result = await findRelevantContent("I want a wear for cold winters");
+  const embbedings = new Embeddings(process.env.DATABASE_URL!, process.env.OPENAI_API_KEY!);
 
+  const result = await embbedings.findRelevantContent("I want a wear for cold winters");
+
+  console.log("findRelevantContent");
   console.dir(result);
   process.exit(0);
 }

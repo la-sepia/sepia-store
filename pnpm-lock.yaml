@@ -215,6 +215,9 @@ importers:
       medusa-react:
         specifier: ^9.0.0
         version: 9.0.18(@medusajs/medusa@1.20.8)(@tanstack/react-query@4.22.0)(react-dom@18.3.1)(react@18.3.1)
+      medusa-ui-sepia:
+        specifier: workspace:*
+        version: link:../../packages/medusa-ui-sepia
       next:
         specifier: ^14.0.0
         version: 14.2.5(@babel/core@7.24.9)(@playwright/test@1.45.3)(react-dom@18.3.1)(react@18.3.1)

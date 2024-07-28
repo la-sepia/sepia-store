@@ -1,1 +1,1 @@
-export { findRelevantContent } from "./lib/ai/embeddings";
+export { Embeddings } from "./lib/ai/embeddings";

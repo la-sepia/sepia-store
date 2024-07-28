@@ -38,6 +38,7 @@
     "chromadb-default-embed": "^2.13.2",
     "lodash": "^4.17.21",
     "medusa-react": "^9.0.0",
+    "medusa-ui-sepia": "workspace:*",
     "next": "^14.0.0",
     "openai": "^4.53.0",
     "pg": "^8.11.3",

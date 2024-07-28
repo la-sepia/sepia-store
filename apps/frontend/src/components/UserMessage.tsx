@@ -8,7 +8,7 @@ export const UserMessage = ({ message }: { message: Message }) => {
           <svg
             stroke="none"
             fill="black"
-            stroke-width="0"
+            strokeWidth="0"
             viewBox="0 0 16 16"
             height="20"
             width="20"
