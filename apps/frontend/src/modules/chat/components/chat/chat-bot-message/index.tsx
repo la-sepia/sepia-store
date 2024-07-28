@@ -4,7 +4,7 @@ import { spinner } from "./spinner"
 import { StreamableValue } from "ai/rsc"
 import { useStreamableText } from "../../../../../lib/hooks/use-streamable-text"
 import { CuttlefishIcon } from "./cuttlefish-icon"
-import { ReactElement } from "react"
+import { ReactElement, ReactNode } from "react"
 
 export const ChatBotMessage = ({
   content,
@@ -22,6 +22,26 @@ export const ChatBotMessage = ({
 
         <div className="bg-slate-500 p-3 rounded-lg max-w-[75%] text-primary-foreground rounded-tl-none text-sm text-gray-50">
           {text}
+        </div>
+      </div>
+    </>
+  )
+}
+
+export const ChatStringMessage = ({
+  children,
+}: {
+  children: ReactNode
+}): ReactElement => {
+  return (
+    <>
+      <div className="flex items-start gap-3">
+        <span className="rounded-sm bg-slate-500 relative flex shrink-0 overflow-hidden min-w-8 min-h-8 items-center justify-center ">
+          <CuttlefishIcon />
+        </span>
+
+        <div className="bg-slate-500 p-3 rounded-lg max-w-[75%] text-primary-foreground rounded-tl-none text-sm text-gray-50">
+          {children}
         </div>
       </div>
     </>
