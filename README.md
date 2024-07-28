@@ -39,6 +39,7 @@ docker compose exec -ti pgsql createdb -U postgres medusa-9ugN
 ### Load example database
 
 ```
+pnpm run --filter medusa-plugin-sepia build
 pnpm run --filter backend seed
 ```
 
@@ -52,7 +53,7 @@ pnpm run dev
 
 ### Open sites
 
-* Frontend: http://localhost:3000/
-* Backend: http://localhost:7001/
-    * Username: `admin@example.com`
-    * Password: `admin`
+- Frontend: http://localhost:3000/
+- Backend: http://localhost:7001/
+  - Username: `admin@example.com`
+  - Password: `admin`

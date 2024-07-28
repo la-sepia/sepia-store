@@ -3,6 +3,7 @@
   "ui": "tui",
   "tasks": {
     "dev": {
+      "dependsOn": ["medusa-plugin-sepia#build", "medusa-ui-sepia#build"],
       "cache": false,
       "persistent": true
     }
