@@ -3,17 +3,16 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "ingest": "tsx src/main.ts"
+    "ingest": "dotenvx run -- tsx src/main.ts"
   },
   "devDependencies": {
-    "ts-node": "^10.9.2",
     "tsx": "^4.16.2",
     "typescript": "^5.5.4"
   },
   "dependencies": {
-    "@ai-sdk/openai": "^0.0.37",
-    "ai": "^3.2.32",
-    "drizzle-orm": "^0.32.1",
-    "postgres": "^3.4.4"
+    "@dotenvx/dotenvx": "^1.6.4",
+    "cross-env": "^7.0.3",
+    "dotenv": "16.3.1",
+    "medusa-ui-sepia": "workspace:*"
   }
 }
