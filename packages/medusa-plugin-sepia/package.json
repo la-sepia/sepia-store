@@ -1,0 +1,23 @@
+{
+  "name": "medusa-plugin-sepia",
+  "main": "dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@medusajs/types": "^1.11.17",
+    "cross-env": "^5.2.1",
+    "typescript": "^4.4.4"
+  },
+  "scripts": {
+    "watch": "tsc --build --watch",
+    "prepare": "cross-env NODE_ENV=production npm run build",
+    "build": "tsc --build"
+  },
+  "dependencies": {
+    "@medusajs/modules-sdk": "^1.12.3"
+  }
+}

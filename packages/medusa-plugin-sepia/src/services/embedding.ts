@@ -2,17 +2,32 @@ import { Product, TransactionBaseService } from "@medusajs/medusa";
 import { Embedding, EmbeddingMetadata } from "../models/embedding";
 import { embed } from "ai";
 import { openai } from "@ai-sdk/openai";
+import EmbeddingRepository from "../repositories/embedding";
+import { EntityManager, IsNull, Not } from "typeorm";
+
+type InjectedDependencies = {
+  manager: EntityManager;
+  embeddingRepository: typeof EmbeddingRepository;
+};
 
 class EmbeddingService extends TransactionBaseService {
+  protected embeddingRepository_: typeof EmbeddingRepository;
+
+  constructor({ embeddingRepository }: InjectedDependencies) {
+    super(arguments[0]);
+
+    this.embeddingRepository_ = embeddingRepository;
+  }
+
   async upsertProduct(product: Product): Promise<void> {
     const document = `Product name: ${product.title}. Product description: ${product.description}`;
     const metadata: EmbeddingMetadata = {
       id: product.id,
       type: "product",
-      handle: product.handle,
+      handle: product.handle!,
     };
 
-    const repository = this.activeManager_.getRepository(Embedding);
+    const repository = this.activeManager_.withRepository(this.embeddingRepository_);
 
     const embedding = await repository
       .createQueryBuilder("embedding")
@@ -29,7 +44,7 @@ class EmbeddingService extends TransactionBaseService {
   }
 
   async deleteProduct(product: Product): Promise<void> {
-    const repository = this.activeManager_.getRepository(Embedding);
+    const repository = this.activeManager_.withRepository(this.embeddingRepository_);
 
     const embedding = await repository
       .createQueryBuilder("embedding")
@@ -44,7 +59,7 @@ class EmbeddingService extends TransactionBaseService {
   }
 
   private async insert(document: string, metadata: EmbeddingMetadata): Promise<void> {
-    const repository = this.activeManager_.getRepository(Embedding);
+    const repository = this.activeManager_.withRepository(this.embeddingRepository_);
 
     const embedding = new Embedding();
     embedding.document = document;
@@ -55,7 +70,7 @@ class EmbeddingService extends TransactionBaseService {
   }
 
   private async update(embedding: Embedding, document: string, metadata: EmbeddingMetadata): Promise<void> {
-    const repository = this.activeManager_.getRepository(Embedding);
+    const repository = this.activeManager_.withRepository(this.embeddingRepository_);
 
     embedding.document = document;
     embedding.embedding = await this.generateEmbeddings(document);
