@@ -34,8 +34,6 @@
     "ai": "^3.2.32",
     "algoliasearch": "^4.20.0",
     "axios": "^1.6.7",
-    "chromadb": "^1.8.1",
-    "chromadb-default-embed": "^2.13.2",
     "lodash": "^4.17.21",
     "medusa-react": "^9.0.0",
     "medusa-ui-sepia": "workspace:*",

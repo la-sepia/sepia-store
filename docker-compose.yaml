@@ -9,17 +9,6 @@ services:
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
 
-  chromadb:
-    restart: no
-    platform: linux/amd64
-    image: chromadb/chroma:latest
-    volumes:
-      - chroma-data:/chroma/chroma
-    ports:
-      - "8000:8000"
-
 volumes:
   data:
-    driver: local
-  chroma-data:
     driver: local
