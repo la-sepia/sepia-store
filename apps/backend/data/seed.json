@@ -122,6 +122,9 @@
           "id": "pcat_shirts"
         }
       ],
+      "collection": {
+        "id": "pcol_merch"
+      },
       "subtitle": null,
       "description": "Reimagine the feeling of a classic T-shirt. With our cotton T-shirts, everyday essentials no longer have to be ordinary.",
       "handle": "t-shirt",
@@ -337,6 +340,9 @@
           "id": "pcat_shirts"
         }
       ],
+      "collection": {
+        "id": "pcol_merch"
+      },
       "subtitle": null,
       "description": "Reimagine the feeling of a classic sweatshirt. With our cotton sweatshirt, everyday essentials no longer have to be ordinary.",
       "handle": "sweatshirt",
@@ -439,6 +445,9 @@
           "id": "pcat_pants"
         }
       ],
+      "collection": {
+        "id": "pcol_merch"
+      },
       "subtitle": null,
       "description": "Reimagine the feeling of classic sweatpants. With our cotton sweatpants, everyday essentials no longer have to be ordinary.",
       "handle": "sweatpants",
@@ -541,6 +550,9 @@
           "id": "pcat_merch"
         }
       ],
+      "collection": {
+        "id": "pcol_merch"
+      },
       "subtitle": null,
       "description": "Reimagine the feeling of classic shorts. With our cotton shorts, everyday essentials no longer have to be ordinary.",
       "handle": "shorts",
@@ -646,6 +658,9 @@
           "id": "pcat_hidden_featured"
         }
       ],
+      "collection": {
+        "id": "pcol_merch"
+      },
       "subtitle": null,
       "description": "Reimagine the feeling of a classic hoodie. With our cotton hoodie, everyday essentials no longer have to be ordinary.",
       "handle": "hoodie",
@@ -751,6 +766,9 @@
           "id": "pcat_hidden_featured"
         }
       ],
+      "collection": {
+        "id": "pcol_merch"
+      },
       "subtitle": null,
       "description": "Reimagine the feeling of a classic longsleeve. With our cotton longsleeve, everyday essentials no longer have to be ordinary.",
       "handle": "longsleeve",
@@ -856,6 +874,9 @@
           "id": "pcat_hidden_featured"
         }
       ],
+      "collection": {
+        "id": "pcol_merch"
+      },
       "subtitle": null,
       "description": "Every programmer's best friend.",
       "handle": "coffee-mug",
@@ -927,6 +948,13 @@
       "rank": 0,
       "category_children": [],
       "handle": "hidden-homepage-featured-items"
+    }
+  ],
+  "product_collections": [
+    {
+      "id": "pcol_merch",
+      "title": "Merch",
+      "handle": "merch"
     }
   ]
 }
