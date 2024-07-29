@@ -16,7 +16,6 @@
     "node": ">=18"
   },
   "resolutions": {
-    "@types/react": "17.0.40",
     "glob": "^7.1.6",
     "webpack": "^5"
   }
