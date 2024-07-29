@@ -2,14 +2,24 @@
   "name": "medusa-ui-sepia",
   "private": true,
   "version": "1.0.0",
+  "sideEffects": false,
   "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "files": [
     "dist/**/*"
   ],
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
   "scripts": {
-    "dev": "tsc --watch",
-    "build": "tsc"
+    "dev": "tsup --watch",
+    "build": "tsup"
   },
   "dependencies": {
     "@ai-sdk/openai": "^0.0.40",
@@ -27,6 +37,7 @@
     "@types/node": "^18.19.39",
     "@types/react": "^18.2.42",
     "@types/react-dom": "^18.2.18",
+    "rimraf": "^3.0.2",
     "tsup": "^8.2.3",
     "typescript": "^5.5.4"
   }

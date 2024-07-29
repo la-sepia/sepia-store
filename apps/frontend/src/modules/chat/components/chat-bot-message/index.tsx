@@ -2,15 +2,15 @@
 
 import { spinner } from "./spinner"
 import { StreamableValue } from "ai/rsc"
-import { useStreamableText } from "../../../../../lib/hooks/use-streamable-text"
 import { CuttlefishIcon } from "./cuttlefish-icon"
 import { ReactElement, ReactNode } from "react"
+import { useStreamableText } from "../../../../lib/hooks/use-streamable-text"
 
 export const ChatBotMessage = ({
   content,
 }: {
   content: string | StreamableValue<string>
-}): ReactElement => {
+}) => {
   const text = useStreamableText(content)
 
   return (

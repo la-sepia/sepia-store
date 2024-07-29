@@ -1,24 +1,25 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "outDir": "./dist",
-    "target": "esnext",
-    "module": "esnext",
-    "lib": ["dom", "esnext"],
+    "composite": false,
     "declaration": true,
-    "sourceMap": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "inlineSources": false,
+    "isolatedModules": true,
     "moduleResolution": "node",
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "preserveWatchOutput": true,
     "skipLibCheck": true,
     "strict": true,
-    "isolatedModules": true,
-    "noFallthroughCasesInSwitch": true,
+    "types": ["@types/node"],
+    "outDir": "./dist",
     "jsx": "react-jsx",
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
-    "downlevelIteration": true,
-    "noImplicitAny": false
+    "lib": ["dom", "ES2023"],
+    "module": "ESNext",
+    "target": "ES2023"
   },
-  "include": ["src"],
-  "exclude": ["dist", "build", "node_modules", "**/.turbo"]
+  "include": ["./src/**/*"]
 }

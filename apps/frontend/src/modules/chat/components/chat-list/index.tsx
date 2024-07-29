@@ -1,7 +1,9 @@
-import { UIState } from "../actions";
+"use client"
+
+import { UIState } from "../chat/actions"
 
 export interface ChatList {
-  messages: UIState;
+  messages: UIState
 }
 
 export function ChatList({ messages }: ChatList) {
@@ -17,5 +19,5 @@ export function ChatList({ messages }: ChatList) {
         <div key={message.id}>{message.display}</div>
       ))}
     </div>
-  );
+  )
 }

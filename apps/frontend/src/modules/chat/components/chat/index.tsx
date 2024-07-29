@@ -1,8 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { ChatToggleButton } from "./chat-toggle-button"
-import { ChatModal } from "./chat-modal"
+import { ChatToggleButton } from "../chat-toggle-button"
+import { ChatModal } from "../chat-modal"
 
 export default function Chat() {
   const [isOpen, setIsOpen] = useState(false)
