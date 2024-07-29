@@ -1,34 +1,25 @@
-"use server"
+"use server";
 
-import {
-  createAI,
-  createStreamableValue,
-  getMutableAIState,
-  streamUI,
-} from "ai/rsc"
-import { openai } from "@ai-sdk/openai"
-import { generateId, generateObject, generateText, nanoid, tool } from "ai"
-import { ChatBotMessage, ChatSpinnerMessage } from "./chat-bot-message"
+import { createAI, createStreamableValue, getMutableAIState, streamUI } from "ai/rsc";
+import { openai } from "@ai-sdk/openai";
+import { generateId, generateObject } from "ai";
+import { ChatBotMessage, ChatSpinnerMessage } from "./chat-bot-message";
 
-import { CoreMessage } from "ai"
-import { z } from "zod"
-import { Embeddings } from "medusa-ui-sepia"
-import { redirect } from "next/navigation"
-import { Redir } from "./Redir"
+import { CoreMessage } from "ai";
+import { z } from "zod";
+import { Redir } from "./Redir";
+import { Embeddings } from "../../../../lib/ai/embeddings";
 
 export type Message = CoreMessage & {
-  id: string
-}
+  id: string;
+};
 
 export async function submitUserMessage(content: string) {
-  "use server"
+  "use server";
 
-  const embbedings = new Embeddings(
-    process.env.DATABASE_URL!,
-    process.env.OPENAI_API_KEY!
-  )
+  const embbedings = new Embeddings(process.env.DATABASE_URL!, process.env.OPENAI_API_KEY!);
 
-  const aiState = getMutableAIState()
+  const aiState = getMutableAIState();
 
   aiState.update({
     ...aiState.get(),
@@ -40,10 +31,10 @@ export async function submitUserMessage(content: string) {
         content,
       },
     ],
-  })
+  });
 
-  let textStream: undefined | ReturnType<typeof createStreamableValue<string>>
-  let textNode: undefined | React.ReactNode
+  let textStream: undefined | ReturnType<typeof createStreamableValue<string>>;
+  let textNode: undefined | React.ReactNode;
 
   const result = await streamUI({
     system:
@@ -62,12 +53,12 @@ export async function submitUserMessage(content: string) {
 
     text: ({ content, done, delta }) => {
       if (!textStream) {
-        textStream = createStreamableValue("")
-        textNode = <ChatBotMessage content={textStream.value} />
+        textStream = createStreamableValue("");
+        textNode = <ChatBotMessage content={textStream.value} />;
       }
 
       if (done) {
-        textStream.done()
+        textStream.done();
         aiState.done({
           ...aiState.get(),
           messages: [
@@ -78,77 +69,66 @@ export async function submitUserMessage(content: string) {
               content,
             },
           ],
-        })
+        });
       } else {
-        textStream.update(delta)
+        textStream.update(delta);
       }
 
-      return textNode
+      return textNode;
     },
 
     tools: {
       showClothesInformation: {
-        description:
-          "Show the piece of clothes selected to the user. Always use this tool to tell the piece of clothes to the user.",
+        description: "Show the piece of clothes selected to the user. Always use this tool to tell the piece of clothes to the user.",
         parameters: z.object({
-          piece: z
-            .string()
-            .describe(
-              "The name of the piece of clothing suggested to the client"
-            ),
+          piece: z.string().describe("The name of the piece of clothing suggested to the client"),
         }),
         generate: async function* ({ piece }) {
-          yield `Searching...`
+          yield `Searching...`;
 
-          const data = await embbedings.findRelevantContent(piece)
+          const data = await embbedings.findRelevantContent(piece);
 
           const result = await generateObject({
             model: openai("gpt-4o-mini"),
             mode: "json",
             schema: z.object({
               id: z.string(),
-              description: z
-                .string()
-                .describe(
-                  "2-3 sentences about the amazing piece of clothes selected"
-                ),
+              description: z.string().describe("2-3 sentences about the amazing piece of clothes selected"),
             }),
             prompt:
               "The customer wants to buy a ${piece}. We have these product in stock, returns the id and a description of the most suitable piece of clothes:" +
-              data.map((t) =>
-                JSON.stringify({ id: t.metadata.handle, article: t.document })
-              ),
-          })
+              data.map((t) => JSON.stringify({ id: t.metadata.handle, article: t.document })),
+          });
 
           const {
             object: { id, description },
-          } = result
+          } = result;
 
-          return <Redir id={id} description={description} />
+          return <Redir id={id} description={description} />;
         },
       },
     },
-  })
+  });
 
   return {
     id: generateId(),
     display: result.value,
-  }
+  };
 }
 
 export type AIState = {
-  chatId: string
-  messages: Message[]
-}
+  chatId: string;
+  messages: Message[];
+};
 
 export type UIState = {
-  id: string
-  display: React.ReactNode
-}[]
+  id: string;
+  display: React.ReactNode;
+}[];
 
 export type UIActions = {
-  submitUserMessage: typeof submitUserMessage
-}
+  submitUserMessage: typeof submitUserMessage;
+};
 
 export const AI = createAI<AIState, UIState, UIActions>({
   actions: {
@@ -156,4 +136,4 @@ export const AI = createAI<AIState, UIState, UIActions>({
   },
   initialAIState: { chatId: generateId(), messages: [] },
   initialUIState: [],
-})
+});

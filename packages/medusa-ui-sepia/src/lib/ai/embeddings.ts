@@ -1,24 +1,21 @@
-import { embed, embedMany } from "ai";
-import { openai, createOpenAI } from "@ai-sdk/openai";
+import { embed } from "ai";
+import { createOpenAI } from "@ai-sdk/openai";
 import { EmbeddingModelV1 } from "@ai-sdk/provider";
-import { db } from "../db";
 import { cosineDistance, desc, gt, sql } from "drizzle-orm";
 import { embeddings } from "../db/schema/embeddings";
-import { PostgresJsDatabase } from "drizzle-orm/postgres-js";
+import { drizzle, PostgresJsDatabase } from "drizzle-orm/postgres-js";
+import postgres from "postgres";
 
 export class Embeddings {
   embeddingModel: EmbeddingModelV1<string>;
   db: PostgresJsDatabase;
 
-  constructor(
-    private readonly connectionUri: string,
-    apiKey: string
-  ) {
+  constructor(databaseUrl: string, apiKey: string) {
     const openai = createOpenAI({
       apiKey,
     });
 
-    this.db = db(connectionUri);
+    this.db = drizzle(postgres(databaseUrl));
     this.embeddingModel = openai.embedding("text-embedding-3-small");
   }
 

@@ -3,24 +3,30 @@
   "private": true,
   "version": "1.0.0",
   "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "files": [
     "dist/**/*"
   ],
   "scripts": {
-    "dev": "tsup --watch",
-    "build": "tsup"
+    "dev": "tsc --watch",
+    "build": "tsc"
   },
   "dependencies": {
-    "@ai-sdk/openai": "^0.0.37",
-    "ai": "^3.2.32",
+    "@ai-sdk/openai": "^0.0.40",
+    "@medusajs/icons": "^1.2.2",
+    "ai": "^3.2.34",
     "drizzle-orm": "^0.32.1",
     "nanoid": "^5.0.7",
-    "postgres": "^3.4.4"
+    "next": "^14.0.0",
+    "postgres": "^3.4.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^18.19.39",
+    "@types/react": "^18.2.42",
+    "@types/react-dom": "^18.2.18",
     "tsup": "^8.2.3",
     "typescript": "^5.5.4"
   }
