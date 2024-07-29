@@ -20,7 +20,18 @@ class EmbeddingService extends TransactionBaseService {
   }
 
   async upsertProduct(product: Product): Promise<void> {
-    const document = `Product name: ${product.title}. Product description: ${product.description}`;
+    const documentParts: string[] = [];
+    documentParts.push(`Product Name: ${product.title}`);
+
+    product.options.forEach((option) => {
+      const values = new Set<string>();
+      option.values.forEach((value) => values.add(value.value));
+      documentParts.push(`Product ${option.title}: ${Array.from(values)}`);
+    });
+
+    documentParts.push(`Product Description: ${product.description}`);
+    const document = documentParts.join(". ");
+
     const metadata: EmbeddingMetadata = {
       id: product.id,
       type: "product",

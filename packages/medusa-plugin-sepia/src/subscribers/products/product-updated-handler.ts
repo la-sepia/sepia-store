@@ -9,10 +9,11 @@ interface ProductCreatedEvent {
 export default async function productUpdatedHandler({ data, eventName, container }: SubscriberArgs<ProductCreatedEvent>) {
   const productService: ProductService = container.resolve("productService");
   const embeddingService: EmbeddingService = container.resolve("embeddingService");
-  const logger: Logger = container.resolve("logger");
 
   const { id } = data;
-  const product = await productService.retrieve(id);
+  const product = await productService.retrieve(id, {
+    relations: ["options", "options.values"],
+  });
 
   await embeddingService.upsertProduct(product);
 }

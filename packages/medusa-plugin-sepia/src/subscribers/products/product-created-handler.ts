@@ -10,7 +10,9 @@ export default async function productCreatedHandler({ data, eventName, container
   const embeddingService: EmbeddingService = container.resolve("embeddingService");
 
   const { id } = data;
-  const product = await productService.retrieve(id);
+  const product = await productService.retrieve(id, {
+    relations: ["options", "options.values"],
+  });
 
   await embeddingService.upsertProduct(product);
 }

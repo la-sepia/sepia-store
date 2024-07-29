@@ -44,7 +44,7 @@
     "medusa-interfaces": "1.3.10",
     "medusa-payment-manual": "1.0.25",
     "medusa-payment-stripe": "6.0.10",
-    "medusa-plugin-sepia": "workspace:latest",
+    "medusa-plugin-sepia": "workspace:*",
     "prism-react-renderer": "^2.0.4",
     "typeorm": "0.3.16"
   },
