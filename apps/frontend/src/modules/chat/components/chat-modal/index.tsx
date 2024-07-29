@@ -27,9 +27,9 @@ export const ChatModal = ({ isOpen }: Props) => {
       style={{
         boxShadow: "0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgb(0 0 0 / 0.05)",
       }}
-      className="z-10 fixed bottom-[calc(4rem+1.5rem)] overflow-auto right-0 mr-4  w-[440px] h-[634px]"
+      className="z-10 bg-white fixed bottom-[calc(4rem+1.5rem)] overflow-auto right-0 mr-4  w-[440px] h-[634px]"
     >
-      <div className="p-6 bg-white rounded-t-lg border border-b-0 border-[#e5e7eb]">
+      <div className="p-6 rounded-t-lg border border-b-0 border-[#e5e7eb]">
         <div className="flex flex-col space-y-1.5 pb-6">
           <h2 className="font-semibold text-lg tracking-tight">SEPIA</h2>
           <p className="text-sm text-[#6b7280] leading-3">Chat with me</p>
