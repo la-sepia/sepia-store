@@ -83,7 +83,7 @@ importers:
         specifier: 6.0.10
         version: 6.0.10(@medusajs/medusa@1.20.8)(@types/node@17.0.21)(pg@8.12.0)
       medusa-plugin-sepia:
-        specifier: workspace:latest
+        specifier: workspace:*
         version: link:../../packages/medusa-plugin-sepia
       prism-react-renderer:
         specifier: ^2.0.4
@@ -301,7 +301,7 @@ importers:
         specifier: ^5.3.2
         version: 5.5.4
 
-  packages/ingestor:
+  apps/ingestor:
     dependencies:
       '@dotenvx/dotenvx':
         specifier: ^1.6.4
@@ -314,7 +314,7 @@ importers:
         version: 16.3.1
       medusa-ui-sepia:
         specifier: workspace:*
-        version: link:../medusa-ui-sepia
+        version: link:../../packages/medusa-ui-sepia
     devDependencies:
       tsx:
         specifier: ^4.16.2
