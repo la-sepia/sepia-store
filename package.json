@@ -2,7 +2,8 @@
   "name": "sepia-store",
   "private": "true",
   "scripts": {
-    "dev": "turbo dev"
+    "build": "turbo run build",
+    "dev": "turbo run dev"
   },
   "devDependencies": {
     "just-pnpm": "^1.0.2",

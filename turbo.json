@@ -1,11 +1,12 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "ui": "tui",
   "tasks": {
     "dev": {
-      "dependsOn": ["medusa-plugin-sepia#build", "medusa-ui-sepia#build"],
       "cache": false,
       "persistent": true
+    },
+    "build": {
+      "dependsOn": ["^build"]
     }
   }
 }
