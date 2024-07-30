@@ -22,7 +22,7 @@ export type Message = CoreMessage & {
 export async function submitUserMessage(content: string) {
   "use server"
 
-  const embbedings = new Embeddings(
+  const embbedings = await Embeddings.create(
     process.env.DATABASE_URL!,
     process.env.OPENAI_API_KEY!
   )
@@ -97,7 +97,7 @@ export async function submitUserMessage(content: string) {
             ),
         }),
         generate: async function* ({ piece }) {
-          yield `Searching...`
+          yield <ChatSpinnerMessage />
 
           const data = await embbedings.findRelevantContent(piece)
 

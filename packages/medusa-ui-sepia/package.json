@@ -3,34 +3,41 @@
   "private": true,
   "version": "1.0.0",
   "sideEffects": false,
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
   "files": [
     "dist/**/*"
   ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.mjs",
   "exports": {
     "./package.json": "./package.json",
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
+    },
+    "./client": {
+      "types": "./dist/client/index.d.ts",
+      "import": "./dist/client/index.mjs",
+      "require": "./dist/client/index.js"
     }
   },
   "scripts": {
     "dev": "tsup --watch",
     "build": "tsup"
   },
+  "peerDependencies": {
+    "react": "^18",
+    "react-dom": "^18"
+  },
   "dependencies": {
+    "ai": "^3.2.34",
     "@ai-sdk/openai": "^0.0.40",
     "@medusajs/icons": "^1.2.2",
-    "ai": "^3.2.34",
     "drizzle-orm": "^0.32.1",
+    "pg": "^8.12.0",
     "nanoid": "^5.0.7",
     "next": "^14.0.0",
-    "postgres": "^3.4.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {

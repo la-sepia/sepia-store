@@ -4,7 +4,7 @@ import { spinner } from "./spinner"
 import { StreamableValue } from "ai/rsc"
 import { CuttlefishIcon } from "./cuttlefish-icon"
 import { ReactElement, ReactNode } from "react"
-import { useStreamableText } from "../../../../lib/hooks/use-streamable-text"
+import { useStreamableText } from "medusa-ui-sepia/client"
 
 export const ChatBotMessage = ({
   content,
