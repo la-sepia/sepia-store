@@ -3,7 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "ingest": "dotenvx run -- tsx src/main.ts"
+    "build": "tsup",
+    "ingest": "dotenvx run -- tsx src/main.ts",
+    "start": "dotenvx run -- node dist/main.js"
   },
   "devDependencies": {
     "tsx": "^4.16.2",
