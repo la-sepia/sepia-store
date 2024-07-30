@@ -1,22 +1,32 @@
 import { embed } from "ai";
-import { createOpenAI } from "@ai-sdk/openai";
+import { createOpenAI, OpenAIProvider } from "@ai-sdk/openai";
 import { EmbeddingModelV1 } from "@ai-sdk/provider";
 import { cosineDistance, desc, gt, sql } from "drizzle-orm";
 import { embeddings } from "../db/schema/embeddings";
-import { drizzle, PostgresJsDatabase } from "drizzle-orm/postgres-js";
-import postgres from "postgres";
+import { drizzle, NodePgDatabase } from "drizzle-orm/node-postgres";
+import pg from "pg";
 
 export class Embeddings {
   embeddingModel: EmbeddingModelV1<string>;
-  db: PostgresJsDatabase;
+  db: NodePgDatabase;
 
-  constructor(databaseUrl: string, apiKey: string) {
+  private constructor(client: pg.Client, openai: OpenAIProvider) {
+    this.db = drizzle(client);
+    this.embeddingModel = openai.embedding("text-embedding-3-small");
+  }
+
+  static async create(connectionString: string, apiKey: string) {
     const openai = createOpenAI({
       apiKey,
     });
 
-    this.db = drizzle(postgres(databaseUrl));
-    this.embeddingModel = openai.embedding("text-embedding-3-small");
+    const client = new pg.Client({
+      connectionString,
+    });
+
+    await client.connect();
+
+    return new Embeddings(client, openai);
   }
 
   async generateEmbedding(value: string): Promise<number[]> {
