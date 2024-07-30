@@ -504,7 +504,7 @@ packages:
       '@ai-sdk/provider-utils': 1.0.5(zod@3.23.8)
       '@ai-sdk/ui-utils': 0.0.21(zod@3.23.8)
       swrv: 1.0.4(vue@3.4.34)
-      vue: 3.4.34(typescript@4.9.5)
+      vue: 3.4.34(typescript@5.5.4)
     transitivePeerDependencies:
       - zod
     dev: false
@@ -8200,7 +8200,7 @@ packages:
     dependencies:
       '@vue/compiler-ssr': 3.4.34
       '@vue/shared': 3.4.34
-      vue: 3.4.34(typescript@4.9.5)
+      vue: 3.4.34(typescript@5.5.4)
     dev: false
 
   /@vue/shared@3.4.34:
@@ -17225,7 +17225,7 @@ packages:
     peerDependencies:
       vue: '>=3.2.26 < 4'
     dependencies:
-      vue: 3.4.34(typescript@4.9.5)
+      vue: 3.4.34(typescript@5.5.4)
     dev: false
 
   /symbol-tree@3.2.4:
@@ -18059,7 +18059,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
-  /vue@3.4.34(typescript@4.9.5):
+  /vue@3.4.34(typescript@5.5.4):
     resolution: {integrity: sha512-VZze05HWlA3ItreQ/ka7Sx7PoD0/3St8FEiSlSTVgb6l4hL+RjtP2/8g5WQBzZgyf8WG2f+g1bXzC7zggLhAJA==}
     peerDependencies:
       typescript: '*'
@@ -18072,7 +18072,7 @@ packages:
       '@vue/runtime-dom': 3.4.34
       '@vue/server-renderer': 3.4.34(vue@3.4.34)
       '@vue/shared': 3.4.34
-      typescript: 4.9.5
+      typescript: 5.5.4
     dev: false
 
   /w3c-hr-time@1.0.2:

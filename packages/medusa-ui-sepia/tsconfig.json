@@ -1,25 +1,26 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "composite": false,
+    "target": "esnext",
+    "module": "esnext",
+    "lib": ["dom", "esnext"],
     "declaration": true,
-    "declarationMap": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "inlineSources": false,
-    "isolatedModules": true,
+    "sourceMap": true,
     "moduleResolution": "node",
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "preserveWatchOutput": true,
     "skipLibCheck": true,
     "strict": true,
-    "types": ["@types/node"],
-    "outDir": "./dist",
+    "isolatedModules": true,
+    "noFallthroughCasesInSwitch": true,
     "jsx": "react-jsx",
-    "lib": ["dom", "ES2023"],
-    "module": "ESNext",
-    "target": "ES2023"
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "downlevelIteration": true,
+    "noImplicitAny": false,
+    "paths": {
+      "medusa-ui-sepia/rsc": ["./src/rsc/index.ts"],
+      "medusa-ui-sepia/ui": ["./src/ui/index.ts"]
+    }
   },
   "include": ["./src/**/*"]
 }
