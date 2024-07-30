@@ -1,12 +1,10 @@
-"use client"
-
-import { UIState } from "../chat/actions"
+import { UIState } from "medusa-ui-sepia/rsc";
 
 export interface ChatList {
-  messages: UIState
+  messages: UIState;
 }
 
-export function ChatList({ messages }: ChatList) {
+export const ChatList = ({ messages }: ChatList) => {
   return (
     <div
       className="pr-4 h-[474px] overflow-y-auto flex flex-col-reverse justify-start gap-y-4"
@@ -19,5 +17,5 @@ export function ChatList({ messages }: ChatList) {
         <div key={message.id}>{message.display}</div>
       ))}
     </div>
-  )
-}
+  );
+};

@@ -4,26 +4,26 @@
   "version": "1.0.0",
   "sideEffects": false,
   "files": [
-    "dist/**/*"
+    "dist"
   ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "module": "./dist/index.mjs",
   "exports": {
     "./package.json": "./package.json",
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+    "./rsc": {
+      "types": "./dist/rsc/index.d.ts",
+      "import": "./dist/rsc/index.mjs",
+      "require": "./dist/rsc/index.js"
     },
-    "./client": {
-      "types": "./dist/client/index.d.ts",
-      "import": "./dist/client/index.mjs",
-      "require": "./dist/client/index.js"
+    "./ui": {
+      "types": "./dist/ui/index.d.ts",
+      "import": "./dist/ui/index.mjs",
+      "require": "./dist/ui/index.js"
     }
   },
   "scripts": {
-    "dev": "tsup --watch",
+    "dev": "tsup --watch --onSuccess 'tsup --dts-only'",
     "build": "tsup"
   },
   "peerDependencies": {

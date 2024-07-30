@@ -2,22 +2,24 @@ import { defineConfig } from "tsup";
 
 export default defineConfig([
   {
-    entry: ["src/index.ts"],
     clean: true,
     dts: true,
-    sourcemap: true,
+    target: "es2019",
+    entry: ["src/ui/index.ts"],
+    outDir: "dist/ui",
     format: ["cjs", "esm"],
-    external: ["react"],
-  },
-  {
-    entry: ["src/client/index.ts"],
-    outDir: "dist/client",
     banner: {
       js: "'use client'",
     },
-    format: ["cjs", "esm"],
-    external: ["react"],
+    external: ["react", /medusa-ui-sepia/],
+  },
+  {
+    clean: true,
     dts: true,
-    sourcemap: true,
+    target: "es2019",
+    entry: ["src/rsc/index.ts"],
+    outDir: "dist/rsc",
+    format: ["cjs", "esm"],
+    external: ["react", /medusa-ui-sepia/],
   },
 ]);
