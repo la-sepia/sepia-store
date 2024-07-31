@@ -1,3 +1,2 @@
 export { Embeddings } from "./ai/embeddings";
-export { AI } from "./ai/actions";
-export type { AIState, Message, UIState } from "./types";
+export { AI, type AIState, type Message, type UIState } from "./ai";

@@ -41,7 +41,7 @@ export const ChatBotSpinnerMessage = (): ReactElement => {
   );
 };
 
-export const Redir = ({ id, description }: { id: string; description: string }) => {
+export const ChatBotShowProductMessage = ({ id, description, color, size }: { id: string; description: string; color?: string; size?: string }) => {
   const router = useRouter();
 
   router.push(`/us/products/${id}`);
