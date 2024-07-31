@@ -33,7 +33,7 @@ export async function submitUserMessage(content: string) {
 
   const result = await streamUI({
     system:
-      "You are a helpful assistant that answers questions about the products in a shop." +
+      "You are a helpful assistant that answers questions about the products in a shop. We sold clothes." +
       "You use the showClothesInformation tool to show the piece of clothes information to the user instead of talking about it." +
       "Only respond to questions using information from tool calls." +
       `If no relevant information is found in the tool calls, respond, "Sorry, I cannot help you with that."`,
@@ -79,9 +79,9 @@ export async function submitUserMessage(content: string) {
         description: "Show the piece of clothes selected to the user. Always use this tool to tell the piece of clothes to the user.",
         parameters: z.object({
           type: z.string().describe("The type of clothing item requested, such as 'tshirt', 'shorts', etc."),
-          color: z.string().optional().describe("Preferred color of the clothing item, if specified."),
-          size: z.string().optional().describe("Preferred size, if specified."),
-          use: z.string().optional().describe("The intended use or season such as 'summer', 'sports', etc. , if specified"),
+          color: z.string().nullable().describe("Preferred color of the clothing item, if specified."),
+          size: z.string().nullable().describe("Preferred size, if specified."),
+          use: z.string().nullable().describe("The intended use or season such as 'summer', 'sports', etc. , if specified"),
           item: z.string().describe("Generate a brief description of the clothing item or any other specific preferences, up to one sentence long."),
         }),
         generate: async function* (clothing) {
@@ -103,26 +103,30 @@ export async function submitUserMessage(content: string) {
             lookingFor += `, for ${clothing.use}`;
           }
 
+          const prompt =
+            `The customer is looking for a ${clothing.item} with these props: ${lookingFor}.` +
+            `Based on the available products in stock, identify the most suitable clothing item` +
+            `and provide their ID and description. If there are no relevant matches, return 'null'.` +
+            `Available stock:\n` +
+            data.map((t) => JSON.stringify({ id: t.metadata.handle, article: t.document }) + "\n");
+
+          console.debug("prompt", prompt);
+
           const result = await generateObject({
             model: openai("gpt-4o-mini"),
             mode: "json",
-            schema: z
-              .object({
-                id: z.string(),
-                description: z.string().describe("2-3 sentences about the amazing piece of clothes selected"),
-                color: z.string().optional().describe("Preferred color of the clothing item, if specified."),
-                size: z.string().optional().describe("Preferred size, if specified."),
-              })
-              .optional(),
-            prompt:
-              `The customer is looking for a ${clothing.item} with these props: ${lookingFor}.` +
-              `Based on the available products in stock, identify the most suitable clothing item` +
-              `and provide their ID and description. If there are no relevant matches, return 'null'.` +
-              `Available stock:` +
-              data.map((t) => JSON.stringify({ id: t.metadata.handle, article: t.document })),
+            schema: z.object({
+              id: z.string().nullable(),
+              description: z.string().nullable().describe("2-3 sentences about the amazing piece of clothes selected"),
+              color: z.string().nullable().describe("Preferred color stock code of the clothing item, if specified."),
+              size: z.string().nullable().describe("Preferred size stock code, if specified."),
+            }),
+            prompt,
           });
 
-          if (!result.object) {
+          console.debug("result", result.object);
+
+          if (!result.object || !result.object.id || !result.object.description) {
             return <ChatBotMessage>Sorry, we don't have anything in stock that matches your request.</ChatBotMessage>;
           }
 

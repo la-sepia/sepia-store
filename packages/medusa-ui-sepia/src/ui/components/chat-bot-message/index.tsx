@@ -1,7 +1,7 @@
 import { SpinnerIcon } from "./spinner";
 import { StreamableValue } from "ai/rsc";
 import { CuttlefishIcon } from "./cuttlefish-icon";
-import { ReactElement, ReactNode } from "react";
+import { ReactElement, ReactNode, useEffect } from "react";
 import { useStreamableText } from "../../hooks/use-streamable-text";
 import { useRouter } from "next/navigation";
 
@@ -41,10 +41,22 @@ export const ChatBotSpinnerMessage = (): ReactElement => {
   );
 };
 
-export const ChatBotShowProductMessage = ({ id, description, color, size }: { id: string; description: string; color?: string; size?: string }) => {
+export const ChatBotShowProductMessage = ({ id, description, color, size }: { id: string; description: string; color?: string | null; size?: string | null }) => {
   const router = useRouter();
 
+  const sanitizedColor = color?.toLowerCase();
+  const sanitizedSize = size?.toLowerCase();
+
   router.push(`/us/products/${id}`);
+
+  useEffect(() => {
+    setTimeout(() => {
+      const buttons = document.querySelectorAll("button");
+      const selectedButtons = Array.from(buttons).filter((button) => [sanitizedColor, sanitizedSize].includes(button.textContent?.toLowerCase()));
+      console.log("selectedButtons", selectedButtons);
+      selectedButtons.forEach((button) => button.click());
+    }, 1000);
+  }, []);
 
   return <ChatBotMessage>{description}</ChatBotMessage>;
 };

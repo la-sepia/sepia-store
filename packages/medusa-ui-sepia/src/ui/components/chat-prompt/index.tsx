@@ -1,5 +1,5 @@
 import { useActions, useUIState } from "ai/rsc";
-import { FormEventHandler, ReactElement } from "react";
+import { FormEventHandler, ReactElement, useEffect } from "react";
 import { generateId } from "ai";
 import { ArrowDownLeftMini, ChatBubble } from "@medusajs/icons";
 import { type AI } from "medusa-ui-sepia/rsc";
@@ -10,9 +10,17 @@ interface ChatPromptProperties {
   setInput: (value: string) => void;
 }
 
+const broadcast = new BroadcastChannel("cart");
+
 export const ChatPrompt = ({ input, setInput }: ChatPromptProperties): ReactElement => {
-  const { submitUserMessage } = useActions<typeof AI>();
+  const { submitUserMessage, submitCardUpdated } = useActions<typeof AI>();
   const [_, setMessages] = useUIState<typeof AI>();
+
+  broadcast.onmessage = async (event) => {
+    const response = await submitCardUpdated();
+
+    setMessages((currentMessages: any) => [...currentMessages, response.message]);
+  };
 
   const handleForm: FormEventHandler = async (event) => {
     event.preventDefault();

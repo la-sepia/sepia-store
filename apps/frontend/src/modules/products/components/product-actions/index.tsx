@@ -5,7 +5,7 @@ import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
 import { Button } from "@medusajs/ui"
 import { isEqual } from "lodash"
 import { useParams } from "next/navigation"
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
 import { useIntersection } from "@lib/hooks/use-in-view"
 import { addToCart } from "@modules/cart/actions"
@@ -27,6 +27,8 @@ export type PriceType = {
   price_type?: "sale" | "default"
   percentage_diff?: string
 }
+
+const broadcast = new BroadcastChannel("cart")
 
 export default function ProductActions({
   product,
@@ -91,9 +93,9 @@ export default function ProductActions({
   }, [variants, variantRecord])
 
   // update the options when a variant is selected
-  const updateOptions = (update: Record<string, string>) => {
-    setOptions({ ...options, ...update })
-  }
+  const updateOptions = useCallback((update: Record<string, string>) => {
+    setOptions((current) => ({ ...current, ...update }))
+  }, [])
 
   // check if the selected variant is in stock
   const inStock = useMemo(() => {
@@ -127,6 +129,13 @@ export default function ProductActions({
     setIsAdding(true)
 
     await addToCart({
+      variantId: variant.id,
+      quantity: 1,
+      countryCode,
+    })
+
+    broadcast.postMessage({
+      product,
       variantId: variant.id,
       quantity: 1,
       countryCode,
