@@ -349,6 +349,9 @@ importers:
       ai:
         specifier: ^3.2.34
         version: 3.2.39(openai@4.53.2)(react@18.3.1)(svelte@4.2.18)(vue@3.4.34)(zod@3.23.8)
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       drizzle-orm:
         specifier: ^0.32.1
         version: 0.32.1(@types/react@18.3.3)(pg@8.12.0)(react@18.3.1)
@@ -367,6 +370,9 @@ importers:
       react-dom:
         specifier: ^18
         version: 18.3.1(react@18.3.1)
+      tailwind-merge:
+        specifier: ^2.4.0
+        version: 2.4.0
       zod:
         specifier: ^3.23.8
         version: 3.23.8
