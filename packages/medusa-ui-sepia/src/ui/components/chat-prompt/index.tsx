@@ -10,17 +10,29 @@ interface ChatPromptProperties {
   setInput: (value: string) => void;
 }
 
-const broadcast = new BroadcastChannel("cart");
+const cartUpdateEvent = new CustomEvent("cartUpdate");
+
+export function updateCart() {
+  window.dispatchEvent(cartUpdateEvent);
+}
 
 export const ChatPrompt = ({ input, setInput }: ChatPromptProperties): ReactElement => {
   const { submitUserMessage, submitCardUpdated } = useActions<typeof AI>();
   const [_, setMessages] = useUIState<typeof AI>();
 
-  broadcast.onmessage = async (event) => {
-    const response = await submitCardUpdated();
+  useEffect(() => {
+    const handleCardUpdate = async () => {
+      const response = await submitCardUpdated();
 
-    setMessages((currentMessages: any) => [...currentMessages, response.message]);
-  };
+      setMessages((currentMessages: any) => [...currentMessages, response.message]);
+    };
+
+    window.addEventListener(cartUpdateEvent.type, handleCardUpdate);
+
+    return () => {
+      window.removeEventListener(cartUpdateEvent.type, handleCardUpdate);
+    };
+  }, []);
 
   const handleForm: FormEventHandler = async (event) => {
     event.preventDefault();

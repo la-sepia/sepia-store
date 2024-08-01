@@ -4,7 +4,7 @@ import { Region } from "@medusajs/medusa"
 import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
 import { Button } from "@medusajs/ui"
 import { isEqual } from "lodash"
-import { useParams } from "next/navigation"
+import { useParams, useSearchParams } from "next/navigation"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
 import { useIntersection } from "@lib/hooks/use-in-view"
@@ -14,6 +14,7 @@ import OptionSelect from "@modules/products/components/option-select"
 
 import MobileActions from "../mobile-actions"
 import ProductPrice from "../product-price"
+import { updateCart } from "medusa-ui-sepia/ui"
 
 type ProductActionsProps = {
   product: PricedProduct
@@ -28,8 +29,6 @@ export type PriceType = {
   percentage_diff?: string
 }
 
-const broadcast = new BroadcastChannel("cart")
-
 export default function ProductActions({
   product,
   region,
@@ -37,6 +36,7 @@ export default function ProductActions({
 }: ProductActionsProps) {
   const [options, setOptions] = useState<Record<string, string>>({})
   const [isAdding, setIsAdding] = useState(false)
+  const searchParams = useSearchParams()
 
   const countryCode = useParams().countryCode as string
 
@@ -47,7 +47,9 @@ export default function ProductActions({
     const optionObj: Record<string, string> = {}
 
     for (const option of product.options || []) {
-      Object.assign(optionObj, { [option.id]: undefined })
+      const value = searchParams.get(option.title)
+
+      Object.assign(optionObj, { [option.id]: value })
     }
 
     setOptions(optionObj)
@@ -134,12 +136,7 @@ export default function ProductActions({
       countryCode,
     })
 
-    broadcast.postMessage({
-      product,
-      variantId: variant.id,
-      quantity: 1,
-      countryCode,
-    })
+    updateCart()
 
     setIsAdding(false)
   }

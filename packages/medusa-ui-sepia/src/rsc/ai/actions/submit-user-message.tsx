@@ -32,11 +32,15 @@ export async function submitUserMessage(content: string) {
   let textNode: undefined | React.ReactNode;
 
   const result = await streamUI({
-    system:
-      "You are a helpful assistant that answers questions about the products in a shop. We sold clothes." +
-      "You use the showClothesInformation tool to show the piece of clothes information to the user instead of talking about it." +
-      "Only respond to questions using information from tool calls." +
-      `If no relevant information is found in the tool calls, respond, "Sorry, I cannot help you with that."`,
+    system: `"You are a helpful assistant specialized in a clothing store. Your primary role is to assist customers with questions about products and help them find what they're looking for.
+
+- General Interaction: You can greet users, respond to common pleasantries, and ensure a friendly interaction. If a user asks a question unrelated to the store's products or services, politely inform them that you can only assist with clothing-related inquiries.
+
+- Product Information: Always use the 'showClothesInformation' tool to provide detailed information about clothing items. Do not discuss specific product details without using this tool.
+
+- Inadequate Information: If a user provides insufficient information about what they want to buy, start by asking for the most essential details, such as the type of clothing item they are looking for. If the user does not specify a color or size, you can proceed without them unless they are crucial for narrowing down options. Only ask for additional details like color or size if the user explicitly mentions they are important or if they want specific recommendations. Avoid asking for every parameter and prioritize the user’s preferences based on the provided information.
+
+- Store-Focused: Remind users that your expertise is specific to the clothing store, and gently steer the conversation back to relevant topics if it veers off-course."`,
 
     model: openai("gpt-4o-mini"),
     initial: <ChatBotSpinnerMessage />,
@@ -90,51 +94,60 @@ export async function submitUserMessage(content: string) {
           const query = JSON.stringify(clothing);
           console.debug("query", query);
 
+          // Step 1: Retrieve relevant products using the RAG system
           const data = await embbedings.findRelevantContent(query);
 
-          let lookingFor = clothing.item;
-          if (clothing.color) {
-            lookingFor += `, in ${clothing.color} color`;
-          }
-          if (clothing.size) {
-            lookingFor += `, in ${clothing.size} size`;
-          }
-          if (clothing.use) {
-            lookingFor += `, for ${clothing.use}`;
-          }
+          const prompt = `You are a helpful assistant that answers questions about the products in a shop.
 
-          const prompt =
-            `The customer is looking for a ${clothing.item} with these props: ${lookingFor}.` +
-            `Based on the available products in stock, identify the most suitable clothing item` +
-            `and provide their ID and description. If there are no relevant matches, return 'null'.` +
-            `Available stock:\n` +
-            data.map((t) => JSON.stringify({ id: t.metadata.handle, article: t.document }) + "\n");
+The customer is looking for a clothing item that matches the following description:
+- Type: ${clothing.item}
+- ${clothing.color ? `Color: ${clothing.color}` : "Color: Any"}
+- ${clothing.size ? `Size: ${clothing.size}` : "Size: Any"}
+- ${clothing.use ? `Use: ${clothing.use}` : "Use: Any"}
+
+Please identify the most suitable product from the available stock below. 
+Provide the product ID, an appropriate color code, and size code. 
+If there are multiple matching colors or sizes, choose the most relevant or common.
+If there are no relevant matches, return 'null'.
+
+Available Stock:
+${data
+  .map(
+    (item) => `
+  - ID: ${item.metadata.handle}
+    ${item.document}
+`
+  )
+  .join("\n")}
+`;
 
           console.debug("prompt", prompt);
 
           const result = await generateObject({
             model: openai("gpt-4o-mini"),
             mode: "json",
-            schema: z.object({
-              id: z.string().nullable(),
-              description: z.string().nullable().describe("2-3 sentences about the amazing piece of clothes selected"),
-              color: z.string().nullable().describe("Preferred color stock code of the clothing item, if specified."),
-              size: z.string().nullable().describe("Preferred size stock code, if specified."),
-            }),
+            schema: z
+              .object({
+                id: z.string(),
+                extendedDescription: z.string().describe("generate a short sentence about the amazing piece of clothes selected"),
+                color: z.string().nullable().describe("Color stock code of the clothing item, if specified."),
+                size: z.string().nullable().describe("Size stock code, if specified."),
+              })
+              .nullable(),
             prompt,
           });
 
           console.debug("result", result.object);
 
-          if (!result.object || !result.object.id || !result.object.description) {
+          if (!result.object || !result.object.id || !result.object.extendedDescription) {
             return <ChatBotMessage>Sorry, we don't have anything in stock that matches your request.</ChatBotMessage>;
           }
 
           const {
-            object: { id, description, color, size },
+            object: { id, extendedDescription, color, size },
           } = result;
 
-          return <ChatBotShowProductMessage id={id} description={description} color={color} size={size} />;
+          return <ChatBotShowProductMessage id={id} description={extendedDescription} color={color} size={size} />;
         },
       },
     },
