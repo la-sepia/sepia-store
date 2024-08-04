@@ -1,7 +1,7 @@
 import { UIState } from "medusa-ui-sepia/rsc";
 
 export interface ChatList {
-  messages: UIState;
+  messages?: UIState;
 }
 
 export const ChatList = ({ messages }: ChatList) => {
@@ -13,9 +13,9 @@ export const ChatList = ({ messages }: ChatList) => {
         maxHeight: "500px",
       }}
     >
-      {messages.toReversed().map((message) => (
-        <div key={message.id}>{message.display}</div>
-      ))}
+      {messages
+        ?.toReversed()
+        .map((message) => <div key={message.id}>{message.display}</div>)}
     </div>
   );
 };
