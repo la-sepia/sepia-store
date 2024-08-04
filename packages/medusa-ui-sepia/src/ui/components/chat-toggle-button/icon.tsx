@@ -1,16 +1,5 @@
 export const ChatIcon = () => (
-  <svg
-    xmlns=" http://www.w3.org/2000/svg"
-    width="30"
-    height="40"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="text-white block border-gray-200 align-middle"
-  >
-    <path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z" className="border-gray-200"></path>
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M4,14a1,1,0,0,0-1,1v1a3,3,0,0,0,6,0V13h2v9a1,1,0,0,0,2,0V13h2v5a3,3,0,0,0,6,0V16a1,1,0,0,0-2,0v2a1,1,0,0,1-2,0V13h3a1,1,0,0,0,1-1V10A9,9,0,0,0,3,10v2a1,1,0,0,0,1,1H7v3a1,1,0,0,1-2,0V15A1,1,0,0,0,4,14Zm1-4a7,7,0,0,1,14,0v1H5Z" />
   </svg>
 );

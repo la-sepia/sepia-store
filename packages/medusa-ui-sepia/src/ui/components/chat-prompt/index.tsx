@@ -1,8 +1,8 @@
-import { useActions, useUIState } from "ai/rsc";
-import { FormEventHandler, ReactElement, useEffect } from "react";
-import { generateId } from "ai";
 import { ArrowDownLeftMini, ChatBubble } from "@medusajs/icons";
+import { generateId } from "ai";
+import { useActions, useUIState } from "ai/rsc";
 import { type AI } from "medusa-ui-sepia/rsc";
+import { FormEventHandler, ReactElement, useEffect } from "react";
 import { ChatUserMessage } from "../chat-user-message";
 
 interface ChatPromptProperties {
@@ -24,18 +24,28 @@ declare global {
 }
 
 export function updateCart({ productId, countryCode }: CartUpdateEvent) {
-  window.dispatchEvent(new CustomEvent<CartUpdateEvent>(CART_UPDATE_EVENT, { detail: { productId, countryCode } }));
+  window.dispatchEvent(
+    new CustomEvent<CartUpdateEvent>(CART_UPDATE_EVENT, {
+      detail: { productId, countryCode },
+    })
+  );
 }
 
-export const ChatPrompt = ({ input, setInput }: ChatPromptProperties): ReactElement => {
+export const ChatPrompt = ({
+  input,
+  setInput,
+}: ChatPromptProperties): ReactElement => {
   const { submitUserMessage, submitCardUpdated } = useActions<typeof AI>();
-  const [_, setMessages] = useUIState<typeof AI>();
+  const [messages, setMessages] = useUIState<typeof AI>();
 
   useEffect(() => {
     const handleCardUpdate = async (event: CustomEvent<CartUpdateEvent>) => {
       const response = await submitCardUpdated(event.detail);
 
-      setMessages((currentMessages: any) => [...currentMessages, response.message]);
+      setMessages((currentMessages: any) => [
+        ...currentMessages,
+        response.message,
+      ]);
     };
 
     window.addEventListener(CART_UPDATE_EVENT, handleCardUpdate);
@@ -68,13 +78,20 @@ export const ChatPrompt = ({ input, setInput }: ChatPromptProperties): ReactElem
 
   return (
     <>
-      <form onSubmit={handleForm} className="flex items-center p-2 rounded-b-2xl shadow-md w-full space-x-2 border border-t-0 border-[#e5e7eb]">
+      <form
+        onSubmit={handleForm}
+        className="flex items-center p-2 rounded-b-2xl shadow-md w-full space-x-2 border border-t-0 border-[#e5e7eb]"
+      >
         <div className="flex items-center flex-grow p-2 bg-gray-100 rounded-full">
           <ChatBubble className="w-5 h-5 text-gray-400" />
           <input
             type="text"
-            placeholder="Type to start chatting..."
-            className="flex-grow px-2 bg-transparent border-none outline-none text-sm"
+            placeholder={
+              messages.length > 0
+                ? "Type a message..."
+                : "Type to start chatting..."
+            }
+            className="flex-grow px-2 bg-transparent border-none outline-none text-sm placeholder-gray-400 text-gray-600"
             autoComplete="off"
             autoCorrect="off"
             autoFocus
@@ -84,7 +101,7 @@ export const ChatPrompt = ({ input, setInput }: ChatPromptProperties): ReactElem
             value={input}
           />
         </div>
-        <button className="flex items-center justify-center w-8 h-8 ml-2 bg-gray-800 rounded-lg">
+        <button className="flex items-center justify-center w-8 h-8 ml-2 bg-slate-700 hover:bg-slate-600 rounded-lg">
           <ArrowDownLeftMini className="w-5 h-5 text-white" />
         </button>
       </form>
