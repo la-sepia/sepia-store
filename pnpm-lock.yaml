@@ -204,7 +204,7 @@ importers:
         version: 4.17.21
       medusa-react:
         specifier: ^9.0.18
-        version: 9.0.18(@medusajs/medusa@1.20.9)(@tanstack/react-query@4.36.1)(react-dom@18.3.1)(react@18.3.1)
+        version: 9.0.18(@medusajs/medusa@1.20.9)(@tanstack/react-query@4.22.0)(react-dom@18.3.1)(react@18.3.1)
       medusa-ui-sepia:
         specifier: workspace:*
         version: link:../../packages/medusa-ui-sepia
@@ -250,7 +250,7 @@ importers:
         version: 0.2.12
       '@medusajs/medusa':
         specifier: ^1.20.9
-        version: 1.20.9(@types/ioredis-mock@8.2.5)(@types/node@18.19.42)(medusa-interfaces@1.3.10)(typeorm@0.3.20)
+        version: 1.20.9(@types/ioredis-mock@8.2.5)(@types/node@18.19.42)(medusa-interfaces@1.3.10)(typeorm@0.3.16)
       '@medusajs/ui-preset':
         specifier: ^1.1.4
         version: 1.1.4(tailwindcss@3.4.7)
@@ -346,9 +346,6 @@ importers:
       '@medusajs/icons':
         specifier: ^1.2.2
         version: 1.2.2(react@18.3.1)
-      '@medusajs/medusa':
-        specifier: ^1.20.8
-        version: 1.20.9(@types/ioredis-mock@8.2.5)(@types/node@18.19.42)(medusa-interfaces@1.3.10)(typeorm@0.3.20)
       '@medusajs/medusa-js':
         specifier: ^6.1.9
         version: 6.1.9(@medusajs/medusa@1.20.9)
@@ -383,6 +380,9 @@ importers:
         specifier: ^3.23.8
         version: 3.23.8
     devDependencies:
+      '@medusajs/medusa':
+        specifier: ^1.20.8
+        version: 1.20.9(@types/ioredis-mock@8.2.5)(@types/node@18.19.42)(medusa-interfaces@1.3.10)(typeorm@0.3.16)
       '@types/node':
         specifier: ^18.19.39
         version: 18.19.42
@@ -4022,7 +4022,7 @@ packages:
     peerDependencies:
       '@medusajs/medusa': ^1.17.2
     dependencies:
-      '@medusajs/medusa': 1.20.9(@types/ioredis-mock@8.2.5)(@types/node@18.19.42)(medusa-interfaces@1.3.10)(typeorm@0.3.20)
+      '@medusajs/medusa': 1.20.9(@types/ioredis-mock@8.2.5)(@types/node@18.19.42)(medusa-interfaces@1.3.10)(typeorm@0.3.16)
       axios: 0.24.0
       cross-env: 5.2.1
       qs: 6.12.3
@@ -4089,90 +4089,6 @@ packages:
       request-ip: 3.3.0
       scrypt-kdf: 2.0.1
       typeorm: 0.3.16(ioredis@5.4.1)(pg@8.12.0)
-      ulid: 2.3.0
-      uuid: 9.0.1
-      winston: 3.13.1
-      zod: 3.23.8
-    transitivePeerDependencies:
-      - '@mikro-orm/better-sqlite'
-      - '@mikro-orm/entity-generator'
-      - '@mikro-orm/mariadb'
-      - '@mikro-orm/migrations'
-      - '@mikro-orm/migrations-mongodb'
-      - '@mikro-orm/mongodb'
-      - '@mikro-orm/mysql'
-      - '@mikro-orm/seeder'
-      - '@mikro-orm/sqlite'
-      - '@types/ioredis-mock'
-      - '@types/node'
-      - better-sqlite3
-      - debug
-      - mssql
-      - mysql
-      - mysql2
-      - pg-native
-      - sqlite3
-      - supports-color
-      - tedious
-    dev: false
-
-  /@medusajs/medusa@1.20.9(@types/ioredis-mock@8.2.5)(@types/node@18.19.42)(medusa-interfaces@1.3.10)(typeorm@0.3.20):
-    resolution: {integrity: sha512-2rE66QhuWsWIp+NAOFUmeiRoP5smG8a+FV29piDz3FYQ5Gvy56d0RaZY/UdvK/oAU4/EQO4P2E7vvYcjQajYBA==}
-    engines: {node: '>=16'}
-    hasBin: true
-    peerDependencies:
-      medusa-interfaces: ^1.3.7
-      typeorm: ^0.3.16
-    dependencies:
-      '@medusajs/core-flows': 0.0.10(@types/node@18.19.42)(pg@8.12.0)
-      '@medusajs/link-modules': 0.2.12(@types/node@18.19.42)(pg@8.12.0)
-      '@medusajs/medusa-cli': 1.3.23(@types/node@18.19.42)
-      '@medusajs/modules-sdk': 1.12.12(@types/node@18.19.42)
-      '@medusajs/orchestration': 0.5.8(@types/node@18.19.42)(pg@8.12.0)
-      '@medusajs/utils': 1.11.10(@types/node@18.19.42)(pg@8.12.0)
-      '@medusajs/workflows-sdk': 0.1.8(@types/node@18.19.42)(pg@8.12.0)
-      awilix: 8.0.1
-      body-parser: 1.20.2
-      boxen: 5.1.2
-      bullmq: 5.11.0
-      chokidar: 3.6.0
-      class-transformer: 0.5.1
-      class-validator: 0.14.1
-      compression: 1.7.4
-      connect-redis: 5.2.0
-      cookie-parser: 1.4.6
-      core-js: 3.37.1
-      cors: 2.8.5
-      cross-spawn: 7.0.3
-      dotenv: 16.4.5
-      express: 4.19.2
-      express-session: 1.18.0
-      fs-exists-cached: 1.0.0
-      glob: 7.2.3
-      ioredis: 5.4.1
-      ioredis-mock: 8.4.0(@types/ioredis-mock@8.2.5)(ioredis@5.4.1)
-      iso8601-duration: 1.3.0
-      jsonwebtoken: 9.0.2
-      lodash: 4.17.21
-      medusa-core-utils: 1.2.3
-      medusa-interfaces: 1.3.10
-      medusa-telemetry: 0.0.18
-      morgan: 1.10.0
-      multer: 1.4.5-lts.1
-      node-schedule: 2.1.1
-      papaparse: 5.3.2
-      passport: 0.6.0
-      passport-custom: 1.1.1
-      passport-jwt: 4.0.1
-      passport-local: 1.0.0
-      pg: 8.12.0
-      qs: 6.12.3
-      randomatic: 3.1.1
-      reflect-metadata: 0.1.14
-      regenerator-runtime: 0.13.11
-      request-ip: 3.3.0
-      scrypt-kdf: 2.0.1
-      typeorm: 0.3.20(ioredis@5.4.1)(pg@8.12.0)
       ulid: 2.3.0
       uuid: 9.0.1
       winston: 3.13.1
@@ -7805,10 +7721,6 @@ packages:
     resolution: {integrity: sha512-OeLyBKBQoT265f5G9biReijeP8mBxNFwY7ZUu1dKL+YzqpG5q5z7J/N1eT8aWyKuhyDTiUHuKm5l+oIVzbtrjw==}
     dev: false
 
-  /@tanstack/query-core@4.36.1:
-    resolution: {integrity: sha512-DJSilV5+ytBP1FbFcEJovv4rnnm/CokuVvrBEtW/Va9DvuJ3HksbXUJEpI0aV1KtuL4ZoO9AVE6PyNLzF7tLeA==}
-    dev: false
-
   /@tanstack/react-query@4.22.0(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-P9o+HjG42uB/xHR6dMsJaPhtZydSe4v0xdG5G/cEj1oHZAXelMlm67/rYJNQGKgBamKElKogj+HYGF+NY2yHYg==}
     peerDependencies:
@@ -7822,24 +7734,6 @@ packages:
         optional: true
     dependencies:
       '@tanstack/query-core': 4.22.0
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      use-sync-external-store: 1.2.2(react@18.3.1)
-    dev: false
-
-  /@tanstack/react-query@4.36.1(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-y7ySVHFyyQblPl3J3eQBWpXZkliroki3ARnBKsdJchlgt7yJLRDUcf4B8soufgiYt3pEQIkBWBx1N9/ZPIeUWw==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-native: '*'
-    peerDependenciesMeta:
-      react-dom:
-        optional: true
-      react-native:
-        optional: true
-    dependencies:
-      '@tanstack/query-core': 4.36.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       use-sync-external-store: 1.2.2(react@18.3.1)
@@ -10198,10 +10092,6 @@ packages:
     engines: {node: '>=0.11'}
     dependencies:
       '@babel/runtime': 7.25.0
-    dev: false
-
-  /dayjs@1.11.12:
-    resolution: {integrity: sha512-Rt2g+nTbLlDWZTwwrIXjy9MeiZmSDI375FvZs72ngxx8PDC6YXOeR3q5LAuPzjZQxhiWdRKac7RKV+YyQYfYIg==}
 
   /debounce-fn@4.0.0:
     resolution: {integrity: sha512-8pYCQiL9Xdcg0UPSD3d+0KMlOjp+KGU5EPwYddgzQ7DATsg4fuUDjQtsYLmWjnk2obnNHgV3vE2Y4jejSOJVBQ==}
@@ -14128,24 +14018,6 @@ packages:
       - debug
     dev: false
 
-  /medusa-react@9.0.18(@medusajs/medusa@1.20.9)(@tanstack/react-query@4.36.1)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-3xSw3MuH7OEX6Tz21Tthev2+1Mk/S1nI6qsqgRqUl4prZTcRFgHXq421hPeqd1RoX2h8SO2Ap1/qObc2da3tCg==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      '@medusajs/medusa': ^1.17.2
-      '@tanstack/react-query': ^4.22.0
-      react: ^16.8 || ^17.0 || ^18.0
-      react-dom: ^16.8 || ^17.0 || ^18.0
-    dependencies:
-      '@medusajs/medusa': 1.20.9(@types/ioredis-mock@8.2.5)(@types/node@18.19.42)(medusa-interfaces@1.3.10)(typeorm@0.3.20)
-      '@medusajs/medusa-js': 6.1.9(@medusajs/medusa@1.20.9)
-      '@tanstack/react-query': 4.36.1(react-dom@18.3.1)(react@18.3.1)
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-    transitivePeerDependencies:
-      - debug
-    dev: false
-
   /medusa-telemetry@0.0.18:
     resolution: {integrity: sha512-WY/cTFoe9+5I8Ly/n614y2XruOUSX3ViL+KznY0xRaQERl/bnx1XAeJMNNnAXTYWaNvdVYwo6ur5qYKai7w/dA==}
     engines: {node: '>=16'}
@@ -16396,9 +16268,6 @@ packages:
   /reflect-metadata@0.1.14:
     resolution: {integrity: sha512-ZhYeb6nRaXCfhnndflDK8qI6ZQ/YcWZCISRAWICW9XYqMUwjZM9Z0DveWX/ABN01oxSHwVxKQmxeYZSsm0jh5A==}
 
-  /reflect-metadata@0.2.2:
-    resolution: {integrity: sha512-urBwgfrvVP/eAyXx4hluJivBKzuEbSQs9rKWCrCkbSxNv8mxPcUZKeuoF3Uy4mJl3Lwprp6yy5/39VWigZ4K6Q==}
-
   /reflect.getprototypeof@1.0.6:
     resolution: {integrity: sha512-fmfw4XgoDke3kdI6h4xcUz1dG8uaiv5q9gcEwLS4Pnth2kxT+GZ7YehS1JTMGBQmtV7Y4GFGbs2re2NqhdozUg==}
     engines: {node: '>= 0.4'}
@@ -17988,85 +17857,6 @@ packages:
       mkdirp: 2.1.6
       pg: 8.12.0
       reflect-metadata: 0.1.14
-      sha.js: 2.4.11
-      tslib: 2.6.3
-      uuid: 9.0.1
-      yargs: 17.7.2
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
-  /typeorm@0.3.20(ioredis@5.4.1)(pg@8.12.0):
-    resolution: {integrity: sha512-sJ0T08dV5eoZroaq9uPKBoNcGslHBR4E4y+EBHs//SiGbblGe7IeduP/IH4ddCcj0qp3PHwDwGnuvqEAnKlq/Q==}
-    engines: {node: '>=16.13.0'}
-    hasBin: true
-    peerDependencies:
-      '@google-cloud/spanner': ^5.18.0
-      '@sap/hana-client': ^2.12.25
-      better-sqlite3: ^7.1.2 || ^8.0.0 || ^9.0.0
-      hdb-pool: ^0.1.6
-      ioredis: ^5.0.4
-      mongodb: ^5.8.0
-      mssql: ^9.1.1 || ^10.0.1
-      mysql2: ^2.2.5 || ^3.0.1
-      oracledb: ^6.3.0
-      pg: ^8.5.1
-      pg-native: ^3.0.0
-      pg-query-stream: ^4.0.0
-      redis: ^3.1.1 || ^4.0.0
-      sql.js: ^1.4.0
-      sqlite3: ^5.0.3
-      ts-node: ^10.7.0
-      typeorm-aurora-data-api-driver: ^2.0.0
-    peerDependenciesMeta:
-      '@google-cloud/spanner':
-        optional: true
-      '@sap/hana-client':
-        optional: true
-      better-sqlite3:
-        optional: true
-      hdb-pool:
-        optional: true
-      ioredis:
-        optional: true
-      mongodb:
-        optional: true
-      mssql:
-        optional: true
-      mysql2:
-        optional: true
-      oracledb:
-        optional: true
-      pg:
-        optional: true
-      pg-native:
-        optional: true
-      pg-query-stream:
-        optional: true
-      redis:
-        optional: true
-      sql.js:
-        optional: true
-      sqlite3:
-        optional: true
-      ts-node:
-        optional: true
-      typeorm-aurora-data-api-driver:
-        optional: true
-    dependencies:
-      '@sqltools/formatter': 1.2.5
-      app-root-path: 3.1.0
-      buffer: 6.0.3
-      chalk: 4.1.2
-      cli-highlight: 2.1.11
-      dayjs: 1.11.12
-      debug: 4.3.6(supports-color@8.1.1)
-      dotenv: 16.4.5
-      glob: 7.2.3
-      ioredis: 5.4.1
-      mkdirp: 2.1.6
-      pg: 8.12.0
-      reflect-metadata: 0.2.2
       sha.js: 2.4.11
       tslib: 2.6.3
       uuid: 9.0.1
