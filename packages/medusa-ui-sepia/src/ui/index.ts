@@ -6,3 +6,4 @@ export { ChatUserMessage } from "./components/chat-user-message";
 export { ChatPrompt, updateCart } from "./components/chat-prompt";
 export { ChatModal } from "./components/chat-modal";
 export { Chat } from "./components/chat";
+export { ChatCarousel } from "./components/chat-carousel";

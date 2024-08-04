@@ -10,10 +10,21 @@ interface ChatPromptProperties {
   setInput: (value: string) => void;
 }
 
-const cartUpdateEvent = new CustomEvent("cartUpdate");
+export interface CartUpdateEvent {
+  productId: string;
+  countryCode: string;
+}
 
-export function updateCart() {
-  window.dispatchEvent(cartUpdateEvent);
+const CART_UPDATE_EVENT = "cartUpdate";
+
+declare global {
+  interface WindowEventMap {
+    cartUpdate: CustomEvent;
+  }
+}
+
+export function updateCart({ productId, countryCode }: CartUpdateEvent) {
+  window.dispatchEvent(new CustomEvent<CartUpdateEvent>(CART_UPDATE_EVENT, { detail: { productId, countryCode } }));
 }
 
 export const ChatPrompt = ({ input, setInput }: ChatPromptProperties): ReactElement => {
@@ -21,16 +32,16 @@ export const ChatPrompt = ({ input, setInput }: ChatPromptProperties): ReactElem
   const [_, setMessages] = useUIState<typeof AI>();
 
   useEffect(() => {
-    const handleCardUpdate = async () => {
-      const response = await submitCardUpdated();
+    const handleCardUpdate = async (event: CustomEvent<CartUpdateEvent>) => {
+      const response = await submitCardUpdated(event.detail);
 
       setMessages((currentMessages: any) => [...currentMessages, response.message]);
     };
 
-    window.addEventListener(cartUpdateEvent.type, handleCardUpdate);
+    window.addEventListener(CART_UPDATE_EVENT, handleCardUpdate);
 
     return () => {
-      window.removeEventListener(cartUpdateEvent.type, handleCardUpdate);
+      window.removeEventListener(CART_UPDATE_EVENT, handleCardUpdate);
     };
   }, []);
 
