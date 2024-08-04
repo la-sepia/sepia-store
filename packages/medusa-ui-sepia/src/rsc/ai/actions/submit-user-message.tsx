@@ -8,7 +8,8 @@ import { z } from "zod";
 
 import { ChatBotMessage, ChatBotSpinnerMessage, ChatBotStreamMessage, ChatBotShowProductMessage, ChatOrderStatus } from "medusa-ui-sepia/ui";
 import { Embeddings } from "../embeddings";
-import { retrieveLookupOrder, retrieveOrder } from "../../medusajs/data";
+import { getCart, retrieveLookupOrder, retrieveOrder } from "../../medusajs/data";
+import { cookies } from "next/headers";
 
 export async function submitUserMessage(content: string) {
   "use server";
@@ -42,6 +43,8 @@ export async function submitUserMessage(content: string) {
 - Inadequate Information: If a user provides insufficient information about what they want to buy, start by asking for the most essential details, such as the type of clothing item they are looking for. If the user does not specify a color or size, you can proceed without them unless they are crucial for narrowing down options. Only ask for additional details like color or size if the user explicitly mentions they are important or if they want specific recommendations. Avoid asking for every parameter and prioritize the user’s preferences based on the provided information.
 
 - Order Status Information: Always use the 'showOrderInformation' tool to provide detail informacion about order status. If the user does not provider de order id and the email, you need to ask for them before to use this tool. If the user does not provide both, you need to explain than you cannot help him.
+
+- Cart Status Information: Always use the 'showCartInformation' tool to provide detail informacion about cart status.
 
 - Store-Focused: Remind users that your expertise is specific to the clothing store, and gently steer the conversation back to relevant topics if it veers off-course."`,
 
@@ -82,6 +85,28 @@ export async function submitUserMessage(content: string) {
     },
 
     tools: {
+      showCartInformation: {
+        description: "Show information about the state of the cart",
+        parameters: z.object({}),
+        generate: async function* ({}) {
+          yield <ChatBotSpinnerMessage />;
+          const cartId = cookies().get("_medusa_cart_id")?.value;
+
+          if (!cartId) {
+            return <ChatBotMessage>Your cart is currently empty :(</ChatBotMessage>;
+          }
+
+          const cart = await getCart(cartId);
+
+          if (!cart) {
+            return <ChatBotMessage>Your cart is currently empty :(</ChatBotMessage>;
+          }
+
+          const total = cart.items.reduce((accumulator, current) => accumulator + (current.total ?? 0), 0) / 100;
+
+          return <ChatBotMessage>Your cart price is {total.toFixed(2)}$</ChatBotMessage>;
+        },
+      },
       showOrderInformation: {
         description: "Show information about the state of a order of the client",
         parameters: z.object({
@@ -108,6 +133,7 @@ export async function submitUserMessage(content: string) {
       showClothesInformation: {
         description: "Show the piece of clothes selected to the user. Always use this tool to tell the piece of clothes to the user.",
         parameters: z.object({
+          language: z.string().describe("The language of the conversation"),
           type: z.string().describe("The type of clothing item requested, such as 'tshirt', 'shorts', etc."),
           color: z.string().nullable().describe("Preferred color of the clothing item, if specified."),
           size: z.string().nullable().describe("Preferred size, if specified."),
@@ -125,6 +151,8 @@ export async function submitUserMessage(content: string) {
 
           const prompt = `You are a helpful assistant that answers questions about the products in a shop.
 
+You must answer in ${clothing.language}.
+
 The customer is looking for a clothing item that matches the following description:
 - Type: ${clothing.item}
 - ${clothing.color ? `Color: ${clothing.color}` : "Color: Any"}
@@ -134,7 +162,7 @@ The customer is looking for a clothing item that matches the following descripti
 Please identify the most suitable product from the available stock below. 
 Provide the product ID, an appropriate color code, and size code. 
 If there are multiple matching colors or sizes, choose the most relevant or common.
-If there are no relevant matches, return 'null'.
+If there are no relevant matches, return a suggestion of other product.
 
 Available Stock:
 ${data
@@ -149,31 +177,51 @@ ${data
 
           console.debug("prompt", prompt);
 
-          const result = await generateObject({
-            model: openai("gpt-4o-mini"),
-            mode: "json",
-            schema: z
-              .object({
-                id: z.string(),
-                extendedDescription: z.string().describe("generate a short sentence about the amazing piece of clothes selected"),
-                color: z.string().nullable().describe("Color stock code of the clothing item, if specified."),
-                size: z.string().nullable().describe("Size stock code, if specified."),
-              })
-              .nullable(),
-            prompt,
-          });
+          try {
+            const result = await generateObject({
+              model: openai("gpt-4o-mini"),
+              mode: "json",
+              schema: z
+                .union([
+                  z.object({
+                    inStock: z.literal(true),
+                    id: z.string(),
+                    extendedDescription: z.string().describe("generate a short sentence about the amazing piece of clothes selected"),
+                    color: z.string().nullable().optional().describe("Color stock code of the clothing item, if specified."),
+                    size: z.string().nullable().optional().describe("Size stock code (S, M, L...), if specified."),
+                  }),
+                  z.object({
+                    inStock: z.literal(false),
+                    id: z.string(),
+                    color: z.string().nullable().optional().describe("Color stock code of the clothing item, if specified."),
+                    size: z.string().nullable().optional().describe("Size stock code (S, M, L...), if specified."),
+                    notFoundSuggestion: z.string().describe("Send a suggestion of another product or another size or color if you cannot found a product"),
+                  }),
+                ])
+                .describe("Product availability schema"),
+              prompt,
+            });
 
-          console.debug("result", result.object);
+            console.debug("result", result.object);
 
-          if (!result.object || !result.object.id || !result.object.extendedDescription) {
-            return <ChatBotMessage>Sorry, we don't have anything in stock that matches your request.</ChatBotMessage>;
+            if (result.object.inStock === false) {
+              const {
+                object: { id, color, size, notFoundSuggestion = "" },
+              } = result;
+
+              return <ChatBotShowProductMessage id={id} description={notFoundSuggestion} color={color} size={size} />;
+            }
+
+            const {
+              object: { id, extendedDescription = "", color, size, inStock },
+            } = result;
+
+            return <ChatBotShowProductMessage id={id} description={extendedDescription} color={color} size={size} />;
+          } catch (error: unknown) {
+            console.error(error);
+
+            return <ChatBotMessage>Sorry, I didnt get that, could you repeat it?</ChatBotMessage>;
           }
-
-          const {
-            object: { id, extendedDescription, color, size },
-          } = result;
-
-          return <ChatBotShowProductMessage id={id} description={extendedDescription} color={color} size={size} />;
         },
       },
     },

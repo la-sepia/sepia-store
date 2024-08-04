@@ -1,4 +1,4 @@
-import { Order } from "@medusajs/medusa";
+import { Order, StoreCartsRes } from "@medusajs/medusa";
 
 import { medusaClient } from "../config";
 import { cookies } from "next/headers";
@@ -38,4 +38,16 @@ export async function retrieveLookupOrder(id: number, email: string): Promise<vo
     .lookupOrder({ display_id: id, email }, headers)
     .then(({ order }) => order)
     .catch((err) => {});
+}
+
+export async function getCart(cartId: string): Promise<StoreCartsRes["cart"] | null> {
+  const headers = getMedusaHeaders(["cart"]);
+
+  return medusaClient.carts
+    .retrieve(cartId, headers)
+    .then(({ cart }) => cart)
+    .catch((err) => {
+      console.log(err);
+      return null;
+    });
 }

@@ -4,7 +4,6 @@ import { createStreamableUI, getMutableAIState } from "ai/rsc";
 import { AI } from "..";
 import { ChatBotMessage, ChatCarousel } from "medusa-ui-sepia/ui";
 import { generateId } from "ai";
-import Image from "next/image";
 
 export interface CartUpdateEvent {
   productId: string;
