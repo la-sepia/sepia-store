@@ -4,7 +4,7 @@ import { Region } from "@medusajs/medusa"
 import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
 import { Button } from "@medusajs/ui"
 import { isEqual } from "lodash"
-import { useParams, useSearchParams } from "next/navigation"
+import { useParams, usePathname, useSearchParams } from "next/navigation"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 
 import { useIntersection } from "@lib/hooks/use-in-view"
@@ -15,6 +15,7 @@ import OptionSelect from "@modules/products/components/option-select"
 import MobileActions from "../mobile-actions"
 import ProductPrice from "../product-price"
 import { updateCart } from "medusa-ui-sepia/ui"
+import { useRouter } from "next/navigation"
 
 type ProductActionsProps = {
   product: PricedProduct
@@ -37,6 +38,8 @@ export default function ProductActions({
   const [options, setOptions] = useState<Record<string, string>>({})
   const [isAdding, setIsAdding] = useState(false)
   const searchParams = useSearchParams()
+  const pathname = usePathname()
+  const router = useRouter()
 
   const countryCode = useParams().countryCode as string
 
@@ -54,6 +57,16 @@ export default function ProductActions({
 
     setOptions(optionObj)
   }, [product])
+
+  useEffect(() => {
+    const parameters = new URLSearchParams()
+    for (const key in options) {
+      const title = product.options?.find((item) => item.id === key)?.title
+      title && options[key] && parameters.set(title, options[key])
+    }
+
+    router.replace(`${pathname}?${parameters.toString()}`)
+  }, [options])
 
   // memoized record of the product's variants
   const variantRecord = useMemo(() => {
@@ -136,7 +149,10 @@ export default function ProductActions({
       countryCode,
     })
 
-    updateCart()
+    updateCart({
+      productId: product.id,
+      countryCode,
+    })
 
     setIsAdding(false)
   }
