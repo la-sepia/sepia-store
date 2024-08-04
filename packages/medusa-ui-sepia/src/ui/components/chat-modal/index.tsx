@@ -1,6 +1,6 @@
 import { useUIState } from "ai/rsc";
 import { type AI } from "medusa-ui-sepia/rsc";
-import { FormEventHandler, useState } from "react";
+import { useState } from "react";
 import { cn } from "../../utils";
 import { ChatList } from "../chat-list";
 import { ChatPrompt } from "../chat-prompt";
@@ -10,12 +10,8 @@ interface Props {
 }
 
 export const ChatModal = ({ isOpen }: Props) => {
-  const [messages, _] = useUIState<typeof AI>();
-  const [input, setInput] = useState<string>("");
-
-  const handleSubmit: FormEventHandler = async (e) => {
-    e.preventDefault();
-  };
+  const [messages] = useUIState<typeof AI>();
+  const [input, setInput] = useState("");
 
   return (
     <div
