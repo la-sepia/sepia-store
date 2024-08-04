@@ -16,13 +16,13 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       prettier:
-        specifier: ^3.2.5
+        specifier: ^3.3.3
         version: 3.3.3
       turbo:
-        specifier: ^2.0.9
-        version: 2.0.9
+        specifier: ^2.0.11
+        version: 2.0.11
       typescript:
-        specifier: ^5.4.5
+        specifier: ^5.5.4
         version: 5.5.4
 
   apps/backend:
@@ -56,7 +56,7 @@ importers:
         version: 4.22.0(react-dom@18.3.1)(react@18.3.1)
       ai:
         specifier: ^3.2.32
-        version: 3.2.39(openai@4.53.2)(react@18.3.1)(svelte@4.2.18)(vue@3.4.34)(zod@3.23.8)
+        version: 3.2.39(openai@4.53.2)(react@18.3.1)(svelte@4.2.18)(vue@3.4.35)(zod@3.23.8)
       body-parser:
         specifier: ^1.19.0
         version: 1.20.2
@@ -153,7 +153,7 @@ importers:
         version: 1.7.19(react-dom@18.3.1)(react@18.3.1)
       '@hookform/error-message':
         specifier: ^2.0.1
-        version: 2.0.1(react-dom@18.3.1)(react-hook-form@7.52.1)(react@18.3.1)
+        version: 2.0.1(react-dom@18.3.1)(react-hook-form@7.52.2)(react@18.3.1)
       '@medusajs/icons':
         specifier: ^1.2.2
         version: 1.2.2(react@18.3.1)
@@ -192,7 +192,7 @@ importers:
         version: 1.54.2
       ai:
         specifier: ^3.2.37
-        version: 3.2.39(openai@4.53.2)(react@18.3.1)(svelte@4.2.18)(vue@3.4.34)(zod@3.23.8)
+        version: 3.2.39(openai@4.53.2)(react@18.3.1)(svelte@4.2.18)(vue@3.4.35)(zod@3.23.8)
       algoliasearch:
         specifier: ^4.24.0
         version: 4.24.0
@@ -204,7 +204,7 @@ importers:
         version: 4.17.21
       medusa-react:
         specifier: ^9.0.18
-        version: 9.0.18(@medusajs/medusa@1.20.9)(@tanstack/react-query@4.22.0)(react-dom@18.3.1)(react@18.3.1)
+        version: 9.0.18(@medusajs/medusa@1.20.9)(@tanstack/react-query@4.36.1)(react-dom@18.3.1)(react@18.3.1)
       medusa-ui-sepia:
         specifier: workspace:*
         version: link:../../packages/medusa-ui-sepia
@@ -250,7 +250,7 @@ importers:
         version: 0.2.12
       '@medusajs/medusa':
         specifier: ^1.20.9
-        version: 1.20.9(@types/ioredis-mock@8.2.5)(@types/node@18.19.42)(medusa-interfaces@1.3.10)(typeorm@0.3.16)
+        version: 1.20.9(@types/ioredis-mock@8.2.5)(@types/node@18.19.42)(medusa-interfaces@1.3.10)(typeorm@0.3.20)
       '@medusajs/ui-preset':
         specifier: ^1.1.4
         version: 1.1.4(tailwindcss@3.4.7)
@@ -346,9 +346,15 @@ importers:
       '@medusajs/icons':
         specifier: ^1.2.2
         version: 1.2.2(react@18.3.1)
+      '@medusajs/medusa':
+        specifier: ^1.20.8
+        version: 1.20.9(@types/ioredis-mock@8.2.5)(@types/node@18.19.42)(medusa-interfaces@1.3.10)(typeorm@0.3.20)
+      '@medusajs/medusa-js':
+        specifier: ^6.1.9
+        version: 6.1.9(@medusajs/medusa@1.20.9)
       ai:
         specifier: ^3.2.34
-        version: 3.2.39(openai@4.53.2)(react@18.3.1)(svelte@4.2.18)(vue@3.4.34)(zod@3.23.8)
+        version: 3.2.39(openai@4.53.2)(react@18.3.1)(svelte@4.2.18)(vue@3.4.35)(zod@3.23.8)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -498,7 +504,7 @@ packages:
       zod: 3.23.8
     dev: false
 
-  /@ai-sdk/vue@0.0.25(vue@3.4.34)(zod@3.23.8):
+  /@ai-sdk/vue@0.0.25(vue@3.4.35)(zod@3.23.8):
     resolution: {integrity: sha512-qdlcWH4mrTq93V3b6c/5GwECLBBSUMV4m1F4SYUV5q+YfZjc8NiNcTYGes4pQoSRJBsDvB1Ch0fTam0hM3Gr7w==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -509,8 +515,8 @@ packages:
     dependencies:
       '@ai-sdk/provider-utils': 1.0.5(zod@3.23.8)
       '@ai-sdk/ui-utils': 0.0.21(zod@3.23.8)
-      swrv: 1.0.4(vue@3.4.34)
-      vue: 3.4.34(typescript@5.5.4)
+      swrv: 1.0.4(vue@3.4.35)
+      vue: 3.4.35(typescript@4.9.5)
     transitivePeerDependencies:
       - zod
     dev: false
@@ -927,6 +933,14 @@ packages:
     hasBin: true
     dependencies:
       '@babel/types': 7.25.2
+
+  /@babel/parser@7.25.3:
+    resolution: {integrity: sha512-iLTJKDbJ4hMvFPgQwwsVoxtHyWpKKPBrxkANrSYewDPaPpT5py5yeVkgPIJ7XYXhndxJpaA3PyALSXQ7u8e/Dw==}
+    engines: {node: '>=6.0.0'}
+    hasBin: true
+    dependencies:
+      '@babel/types': 7.25.2
+    dev: false
 
   /@babel/plugin-bugfix-firefox-class-in-computed-class-key@7.25.0(@babel/core@7.25.2):
     resolution: {integrity: sha512-dG0aApncVQwAUJa8tP1VHTnmU67BeIQvKafd3raEx315H54FfkZSz3B/TT+33ZQAjatGJA79gZqTtqL5QZUKXw==}
@@ -3271,7 +3285,7 @@ packages:
       react-hook-form: 7.38.0(react@18.3.1)
     dev: false
 
-  /@hookform/error-message@2.0.1(react-dom@18.3.1)(react-hook-form@7.52.1)(react@18.3.1):
+  /@hookform/error-message@2.0.1(react-dom@18.3.1)(react-hook-form@7.52.2)(react@18.3.1):
     resolution: {integrity: sha512-U410sAr92xgxT1idlu9WWOVjndxLdgPUHEB8Schr27C9eh7/xUnITWpCMF93s+lGiG++D4JnbSnrb5A21AdSNg==}
     peerDependencies:
       react: '>=16.8.0'
@@ -3280,7 +3294,7 @@ packages:
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      react-hook-form: 7.52.1(react@18.3.1)
+      react-hook-form: 7.52.2(react@18.3.1)
     dev: false
 
   /@hookform/resolvers@3.9.0(react-hook-form@7.38.0):
@@ -4008,7 +4022,7 @@ packages:
     peerDependencies:
       '@medusajs/medusa': ^1.17.2
     dependencies:
-      '@medusajs/medusa': 1.20.9(@types/ioredis-mock@8.2.5)(@types/node@18.19.42)(medusa-interfaces@1.3.10)(typeorm@0.3.16)
+      '@medusajs/medusa': 1.20.9(@types/ioredis-mock@8.2.5)(@types/node@18.19.42)(medusa-interfaces@1.3.10)(typeorm@0.3.20)
       axios: 0.24.0
       cross-env: 5.2.1
       qs: 6.12.3
@@ -4075,6 +4089,90 @@ packages:
       request-ip: 3.3.0
       scrypt-kdf: 2.0.1
       typeorm: 0.3.16(ioredis@5.4.1)(pg@8.12.0)
+      ulid: 2.3.0
+      uuid: 9.0.1
+      winston: 3.13.1
+      zod: 3.23.8
+    transitivePeerDependencies:
+      - '@mikro-orm/better-sqlite'
+      - '@mikro-orm/entity-generator'
+      - '@mikro-orm/mariadb'
+      - '@mikro-orm/migrations'
+      - '@mikro-orm/migrations-mongodb'
+      - '@mikro-orm/mongodb'
+      - '@mikro-orm/mysql'
+      - '@mikro-orm/seeder'
+      - '@mikro-orm/sqlite'
+      - '@types/ioredis-mock'
+      - '@types/node'
+      - better-sqlite3
+      - debug
+      - mssql
+      - mysql
+      - mysql2
+      - pg-native
+      - sqlite3
+      - supports-color
+      - tedious
+    dev: false
+
+  /@medusajs/medusa@1.20.9(@types/ioredis-mock@8.2.5)(@types/node@18.19.42)(medusa-interfaces@1.3.10)(typeorm@0.3.20):
+    resolution: {integrity: sha512-2rE66QhuWsWIp+NAOFUmeiRoP5smG8a+FV29piDz3FYQ5Gvy56d0RaZY/UdvK/oAU4/EQO4P2E7vvYcjQajYBA==}
+    engines: {node: '>=16'}
+    hasBin: true
+    peerDependencies:
+      medusa-interfaces: ^1.3.7
+      typeorm: ^0.3.16
+    dependencies:
+      '@medusajs/core-flows': 0.0.10(@types/node@18.19.42)(pg@8.12.0)
+      '@medusajs/link-modules': 0.2.12(@types/node@18.19.42)(pg@8.12.0)
+      '@medusajs/medusa-cli': 1.3.23(@types/node@18.19.42)
+      '@medusajs/modules-sdk': 1.12.12(@types/node@18.19.42)
+      '@medusajs/orchestration': 0.5.8(@types/node@18.19.42)(pg@8.12.0)
+      '@medusajs/utils': 1.11.10(@types/node@18.19.42)(pg@8.12.0)
+      '@medusajs/workflows-sdk': 0.1.8(@types/node@18.19.42)(pg@8.12.0)
+      awilix: 8.0.1
+      body-parser: 1.20.2
+      boxen: 5.1.2
+      bullmq: 5.11.0
+      chokidar: 3.6.0
+      class-transformer: 0.5.1
+      class-validator: 0.14.1
+      compression: 1.7.4
+      connect-redis: 5.2.0
+      cookie-parser: 1.4.6
+      core-js: 3.37.1
+      cors: 2.8.5
+      cross-spawn: 7.0.3
+      dotenv: 16.4.5
+      express: 4.19.2
+      express-session: 1.18.0
+      fs-exists-cached: 1.0.0
+      glob: 7.2.3
+      ioredis: 5.4.1
+      ioredis-mock: 8.4.0(@types/ioredis-mock@8.2.5)(ioredis@5.4.1)
+      iso8601-duration: 1.3.0
+      jsonwebtoken: 9.0.2
+      lodash: 4.17.21
+      medusa-core-utils: 1.2.3
+      medusa-interfaces: 1.3.10
+      medusa-telemetry: 0.0.18
+      morgan: 1.10.0
+      multer: 1.4.5-lts.1
+      node-schedule: 2.1.1
+      papaparse: 5.3.2
+      passport: 0.6.0
+      passport-custom: 1.1.1
+      passport-jwt: 4.0.1
+      passport-local: 1.0.0
+      pg: 8.12.0
+      qs: 6.12.3
+      randomatic: 3.1.1
+      reflect-metadata: 0.1.14
+      regenerator-runtime: 0.13.11
+      request-ip: 3.3.0
+      scrypt-kdf: 2.0.1
+      typeorm: 0.3.20(ioredis@5.4.1)(pg@8.12.0)
       ulid: 2.3.0
       uuid: 9.0.1
       winston: 3.13.1
@@ -7707,6 +7805,10 @@ packages:
     resolution: {integrity: sha512-OeLyBKBQoT265f5G9biReijeP8mBxNFwY7ZUu1dKL+YzqpG5q5z7J/N1eT8aWyKuhyDTiUHuKm5l+oIVzbtrjw==}
     dev: false
 
+  /@tanstack/query-core@4.36.1:
+    resolution: {integrity: sha512-DJSilV5+ytBP1FbFcEJovv4rnnm/CokuVvrBEtW/Va9DvuJ3HksbXUJEpI0aV1KtuL4ZoO9AVE6PyNLzF7tLeA==}
+    dev: false
+
   /@tanstack/react-query@4.22.0(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-P9o+HjG42uB/xHR6dMsJaPhtZydSe4v0xdG5G/cEj1oHZAXelMlm67/rYJNQGKgBamKElKogj+HYGF+NY2yHYg==}
     peerDependencies:
@@ -7720,6 +7822,24 @@ packages:
         optional: true
     dependencies:
       '@tanstack/query-core': 4.22.0
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      use-sync-external-store: 1.2.2(react@18.3.1)
+    dev: false
+
+  /@tanstack/react-query@4.36.1(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-y7ySVHFyyQblPl3J3eQBWpXZkliroki3ARnBKsdJchlgt7yJLRDUcf4B8soufgiYt3pEQIkBWBx1N9/ZPIeUWw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      '@tanstack/query-core': 4.36.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       use-sync-external-store: 1.2.2(react@18.3.1)
@@ -7896,7 +8016,7 @@ packages:
   /@types/ioredis-mock@8.2.5:
     resolution: {integrity: sha512-cZyuwC9LGtg7s5G9/w6rpy3IOZ6F/hFR0pQlWYZESMo1xQUYbDpa6haqB4grTePjsGzcB/YLBFCjqRunK5wieg==}
     dependencies:
-      '@types/node': 18.19.42
+      '@types/node': 18.19.43
       ioredis: 5.4.1
     transitivePeerDependencies:
       - supports-color
@@ -7952,6 +8072,11 @@ packages:
 
   /@types/node@18.19.42:
     resolution: {integrity: sha512-d2ZFc/3lnK2YCYhos8iaNIYu9Vfhr92nHiyJHRltXWjXUBjEE+A4I58Tdbnw4VhggSW+2j5y5gTrLs4biNnubg==}
+    dependencies:
+      undici-types: 5.26.5
+
+  /@types/node@18.19.43:
+    resolution: {integrity: sha512-Mw/YlgXnyJdEwLoFv2dpuJaDFriX+Pc+0qOBJ57jC1H6cDxIj2xc5yUrdtArDVG0m+KV6622a4p2tenEqB3C/g==}
     dependencies:
       undici-types: 5.26.5
 
@@ -8139,78 +8264,78 @@ packages:
       eslint-visitor-keys: 3.4.3
     dev: true
 
-  /@vue/compiler-core@3.4.34:
-    resolution: {integrity: sha512-Z0izUf32+wAnQewjHu+pQf1yw00EGOmevl1kE+ljjjMe7oEfpQ+BI3/JNK7yMB4IrUsqLDmPecUrpj3mCP+yJQ==}
+  /@vue/compiler-core@3.4.35:
+    resolution: {integrity: sha512-gKp0zGoLnMYtw4uS/SJRRO7rsVggLjvot3mcctlMXunYNsX+aRJDqqw/lV5/gHK91nvaAAlWFgdVl020AW1Prg==}
     dependencies:
-      '@babel/parser': 7.25.0
-      '@vue/shared': 3.4.34
+      '@babel/parser': 7.25.3
+      '@vue/shared': 3.4.35
       entities: 4.5.0
       estree-walker: 2.0.2
       source-map-js: 1.2.0
     dev: false
 
-  /@vue/compiler-dom@3.4.34:
-    resolution: {integrity: sha512-3PUOTS1h5cskdOJMExCu2TInXuM0j60DRPpSCJDqOCupCfUZCJoyQmKtRmA8EgDNZ5kcEE7vketamRZfrEuVDw==}
+  /@vue/compiler-dom@3.4.35:
+    resolution: {integrity: sha512-pWIZRL76/oE/VMhdv/ovZfmuooEni6JPG1BFe7oLk5DZRo/ImydXijoZl/4kh2406boRQ7lxTYzbZEEXEhj9NQ==}
     dependencies:
-      '@vue/compiler-core': 3.4.34
-      '@vue/shared': 3.4.34
+      '@vue/compiler-core': 3.4.35
+      '@vue/shared': 3.4.35
     dev: false
 
-  /@vue/compiler-sfc@3.4.34:
-    resolution: {integrity: sha512-x6lm0UrM03jjDXTPZgD9Ad8bIVD1ifWNit2EaWQIZB5CULr46+FbLQ5RpK7AXtDHGjx9rmvC7QRCTjsiGkAwRw==}
+  /@vue/compiler-sfc@3.4.35:
+    resolution: {integrity: sha512-xacnRS/h/FCsjsMfxBkzjoNxyxEyKyZfBch/P4vkLRvYJwe5ChXmZZrj8Dsed/752H2Q3JE8kYu9Uyha9J6PgA==}
     dependencies:
-      '@babel/parser': 7.25.0
-      '@vue/compiler-core': 3.4.34
-      '@vue/compiler-dom': 3.4.34
-      '@vue/compiler-ssr': 3.4.34
-      '@vue/shared': 3.4.34
+      '@babel/parser': 7.25.3
+      '@vue/compiler-core': 3.4.35
+      '@vue/compiler-dom': 3.4.35
+      '@vue/compiler-ssr': 3.4.35
+      '@vue/shared': 3.4.35
       estree-walker: 2.0.2
       magic-string: 0.30.11
       postcss: 8.4.40
       source-map-js: 1.2.0
     dev: false
 
-  /@vue/compiler-ssr@3.4.34:
-    resolution: {integrity: sha512-8TDBcLaTrFm5rnF+Qm4BlliaopJgqJ28Nsrc80qazynm5aJO+Emu7y0RWw34L8dNnTRdcVBpWzJxhGYzsoVu4g==}
+  /@vue/compiler-ssr@3.4.35:
+    resolution: {integrity: sha512-7iynB+0KB1AAJKk/biENTV5cRGHRdbdaD7Mx3nWcm1W8bVD6QmnH3B4AHhQQ1qZHhqFwzEzMwiytXm3PX1e60A==}
     dependencies:
-      '@vue/compiler-dom': 3.4.34
-      '@vue/shared': 3.4.34
+      '@vue/compiler-dom': 3.4.35
+      '@vue/shared': 3.4.35
     dev: false
 
-  /@vue/reactivity@3.4.34:
-    resolution: {integrity: sha512-ua+Lo+wBRlBEX9TtgPOShE2JwIO7p6BTZ7t1KZVPoaBRfqbC7N3c8Mpzicx173fXxx5VXeU6ykiHo7WgLzJQDA==}
+  /@vue/reactivity@3.4.35:
+    resolution: {integrity: sha512-Ggtz7ZZHakriKioveJtPlStYardwQH6VCs9V13/4qjHSQb/teE30LVJNrbBVs4+aoYGtTQKJbTe4CWGxVZrvEw==}
     dependencies:
-      '@vue/shared': 3.4.34
+      '@vue/shared': 3.4.35
     dev: false
 
-  /@vue/runtime-core@3.4.34:
-    resolution: {integrity: sha512-PXhkiRPwcPGJ1BnyBZFI96GfInCVskd0HPNIAZn7i3YOmLbtbTZpB7/kDTwC1W7IqdGPkTVC63IS7J2nZs4Ebg==}
+  /@vue/runtime-core@3.4.35:
+    resolution: {integrity: sha512-D+BAjFoWwT5wtITpSxwqfWZiBClhBbR+bm0VQlWYFOadUUXFo+5wbe9ErXhLvwguPiLZdEF13QAWi2vP3ZD5tA==}
     dependencies:
-      '@vue/reactivity': 3.4.34
-      '@vue/shared': 3.4.34
+      '@vue/reactivity': 3.4.35
+      '@vue/shared': 3.4.35
     dev: false
 
-  /@vue/runtime-dom@3.4.34:
-    resolution: {integrity: sha512-dXqIe+RqFAK2Euak4UsvbIupalrhc67OuQKpD7HJ3W2fv8jlqvI7szfBCsAEcE8o/wyNpkloxB6J8viuF/E3gw==}
+  /@vue/runtime-dom@3.4.35:
+    resolution: {integrity: sha512-yGOlbos+MVhlS5NWBF2HDNgblG8e2MY3+GigHEyR/dREAluvI5tuUUgie3/9XeqhPE4LF0i2wjlduh5thnfOqw==}
     dependencies:
-      '@vue/reactivity': 3.4.34
-      '@vue/runtime-core': 3.4.34
-      '@vue/shared': 3.4.34
+      '@vue/reactivity': 3.4.35
+      '@vue/runtime-core': 3.4.35
+      '@vue/shared': 3.4.35
       csstype: 3.1.3
     dev: false
 
-  /@vue/server-renderer@3.4.34(vue@3.4.34):
-    resolution: {integrity: sha512-GeyEUfMVRZMD/mZcNONEqg7MiU10QQ1DB3O/Qr6+8uXpbwdlmVgQ5Qs1/ZUAFX1X2UUtqMoGrDRbxdWfOJFT7Q==}
+  /@vue/server-renderer@3.4.35(vue@3.4.35):
+    resolution: {integrity: sha512-iZ0e/u9mRE4T8tNhlo0tbA+gzVkgv8r5BX6s1kRbOZqfpq14qoIvCZ5gIgraOmYkMYrSEZgkkojFPr+Nyq/Mnw==}
     peerDependencies:
-      vue: 3.4.34
+      vue: 3.4.35
     dependencies:
-      '@vue/compiler-ssr': 3.4.34
-      '@vue/shared': 3.4.34
-      vue: 3.4.34(typescript@5.5.4)
+      '@vue/compiler-ssr': 3.4.35
+      '@vue/shared': 3.4.35
+      vue: 3.4.35(typescript@4.9.5)
     dev: false
 
-  /@vue/shared@3.4.34:
-    resolution: {integrity: sha512-x5LmiRLpRsd9KTjAB8MPKf0CDPMcuItjP0gbNqFCIgL1I8iYp4zglhj9w9FPCdIbHG2M91RVeIbArFfFTz9I3A==}
+  /@vue/shared@3.4.35:
+    resolution: {integrity: sha512-hvuhBYYDe+b1G8KHxsQ0diDqDMA8D9laxWZhNAjE83VZb5UDaXl9Xnz7cGdDSyiHM90qqI/CyGMcpBpiDy6VVQ==}
     dev: false
 
   /@webassemblyjs/ast@1.12.1:
@@ -8408,7 +8533,7 @@ packages:
       humanize-ms: 1.2.1
     dev: false
 
-  /ai@3.2.39(openai@4.53.2)(react@18.3.1)(svelte@4.2.18)(vue@3.4.34)(zod@3.23.8):
+  /ai@3.2.39(openai@4.53.2)(react@18.3.1)(svelte@4.2.18)(vue@3.4.35)(zod@3.23.8):
     resolution: {integrity: sha512-agc1zGWJ+dSlWn0joMESsCEpTRGdpuW23INIInbUk7pBzpSpflkYW6J5moYMr+5aAbAN35LgHSbc9LTx/9a1UA==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -8435,7 +8560,7 @@ packages:
       '@ai-sdk/solid': 0.0.24(zod@3.23.8)
       '@ai-sdk/svelte': 0.0.26(svelte@4.2.18)(zod@3.23.8)
       '@ai-sdk/ui-utils': 0.0.21(zod@3.23.8)
-      '@ai-sdk/vue': 0.0.25(vue@3.4.34)(zod@3.23.8)
+      '@ai-sdk/vue': 0.0.25(vue@3.4.35)(zod@3.23.8)
       '@opentelemetry/api': 1.9.0
       eventsource-parser: 1.1.2
       json-schema: 0.4.0
@@ -10073,6 +10198,10 @@ packages:
     engines: {node: '>=0.11'}
     dependencies:
       '@babel/runtime': 7.25.0
+    dev: false
+
+  /dayjs@1.11.12:
+    resolution: {integrity: sha512-Rt2g+nTbLlDWZTwwrIXjy9MeiZmSDI375FvZs72ngxx8PDC6YXOeR3q5LAuPzjZQxhiWdRKac7RKV+YyQYfYIg==}
 
   /debounce-fn@4.0.0:
     resolution: {integrity: sha512-8pYCQiL9Xdcg0UPSD3d+0KMlOjp+KGU5EPwYddgzQ7DATsg4fuUDjQtsYLmWjnk2obnNHgV3vE2Y4jejSOJVBQ==}
@@ -13999,6 +14128,24 @@ packages:
       - debug
     dev: false
 
+  /medusa-react@9.0.18(@medusajs/medusa@1.20.9)(@tanstack/react-query@4.36.1)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-3xSw3MuH7OEX6Tz21Tthev2+1Mk/S1nI6qsqgRqUl4prZTcRFgHXq421hPeqd1RoX2h8SO2Ap1/qObc2da3tCg==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      '@medusajs/medusa': ^1.17.2
+      '@tanstack/react-query': ^4.22.0
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    dependencies:
+      '@medusajs/medusa': 1.20.9(@types/ioredis-mock@8.2.5)(@types/node@18.19.42)(medusa-interfaces@1.3.10)(typeorm@0.3.20)
+      '@medusajs/medusa-js': 6.1.9(@medusajs/medusa@1.20.9)
+      '@tanstack/react-query': 4.36.1(react-dom@18.3.1)(react@18.3.1)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /medusa-telemetry@0.0.18:
     resolution: {integrity: sha512-WY/cTFoe9+5I8Ly/n614y2XruOUSX3ViL+KznY0xRaQERl/bnx1XAeJMNNnAXTYWaNvdVYwo6ur5qYKai7w/dA==}
     engines: {node: '>=16'}
@@ -15867,9 +16014,9 @@ packages:
       react: 18.3.1
     dev: false
 
-  /react-hook-form@7.52.1(react@18.3.1):
-    resolution: {integrity: sha512-uNKIhaoICJ5KQALYZ4TOaOLElyM+xipord+Ha3crEFhTntdLvWZqVY49Wqd/0GiVCA/f9NjemLeiNPjG7Hpurg==}
-    engines: {node: '>=12.22.0'}
+  /react-hook-form@7.52.2(react@18.3.1):
+    resolution: {integrity: sha512-pqfPEbERnxxiNMPd0bzmt1tuaPcVccywFDpyk2uV5xCIBphHV5T8SVnX9/o3kplPE1zzKt77+YIoq+EMwJp56A==}
+    engines: {node: '>=18.0.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18 || ^19
     dependencies:
@@ -16248,6 +16395,9 @@ packages:
 
   /reflect-metadata@0.1.14:
     resolution: {integrity: sha512-ZhYeb6nRaXCfhnndflDK8qI6ZQ/YcWZCISRAWICW9XYqMUwjZM9Z0DveWX/ABN01oxSHwVxKQmxeYZSsm0jh5A==}
+
+  /reflect-metadata@0.2.2:
+    resolution: {integrity: sha512-urBwgfrvVP/eAyXx4hluJivBKzuEbSQs9rKWCrCkbSxNv8mxPcUZKeuoF3Uy4mJl3Lwprp6yy5/39VWigZ4K6Q==}
 
   /reflect.getprototypeof@1.0.6:
     resolution: {integrity: sha512-fmfw4XgoDke3kdI6h4xcUz1dG8uaiv5q9gcEwLS4Pnth2kxT+GZ7YehS1JTMGBQmtV7Y4GFGbs2re2NqhdozUg==}
@@ -17226,12 +17376,12 @@ packages:
     resolution: {integrity: sha512-LqVcOHSB4cPGgitD1riJ1Hh4vdmITOp+BkmfmXRh4hSF/t7EnS4iD+SOTmq7w5pPm/SiPeto4ADbKS6dHUDWFA==}
     dev: false
 
-  /swrv@1.0.4(vue@3.4.34):
+  /swrv@1.0.4(vue@3.4.35):
     resolution: {integrity: sha512-zjEkcP8Ywmj+xOJW3lIT65ciY/4AL4e/Or7Gj0MzU3zBJNMdJiT8geVZhINavnlHRMMCcJLHhraLTAiDOTmQ9g==}
     peerDependencies:
       vue: '>=3.2.26 < 4'
     dependencies:
-      vue: 3.4.34(typescript@5.5.4)
+      vue: 3.4.35(typescript@4.9.5)
     dev: false
 
   /symbol-tree@3.2.4:
@@ -17614,64 +17764,64 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /turbo-darwin-64@2.0.9:
-    resolution: {integrity: sha512-owlGsOaExuVGBUfrnJwjkL1BWlvefjSKczEAcpLx4BI7Oh6ttakOi+JyomkPkFlYElRpjbvlR2gP8WIn6M/+xQ==}
+  /turbo-darwin-64@2.0.11:
+    resolution: {integrity: sha512-YlHEEhcm+jI1BSZoLugGHUWDfRXaNaQIv7tGQBfadYjo9kixBnqoTOU6s1ubOrQMID+lizZZQs79GXwqM6vohg==}
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-darwin-arm64@2.0.9:
-    resolution: {integrity: sha512-XAXkKkePth5ZPPE/9G9tTnPQx0C8UTkGWmNGYkpmGgRr8NedW+HrPsi9N0HcjzzIH9A4TpNYvtiV+WcwdaEjKA==}
+  /turbo-darwin-arm64@2.0.11:
+    resolution: {integrity: sha512-K/YW+hWzRQ/wGmtffxllH4M1tgy8OlwgXODrIiAGzkSpZl9+pIsem/F86UULlhsIeavBYK/LS5+dzV3DPMjJ9w==}
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-64@2.0.9:
-    resolution: {integrity: sha512-l9wSgEjrCFM1aG16zItBsZ206ZlhSSx1owB8Cgskfv0XyIXRGHRkluihiaxkp+UeU5WoEfz4EN5toc+ICA0q0w==}
+  /turbo-linux-64@2.0.11:
+    resolution: {integrity: sha512-mv8CwGP06UPweMh1Vlp6PI6OWnkuibxfIJ4Vlof7xqjohAaZU5FLqeOeHkjQflH/6YrCVuS9wrK0TFOu+meTtA==}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-arm64@2.0.9:
-    resolution: {integrity: sha512-gRnjxXRne18B27SwxXMqL3fJu7jw/8kBrOBTBNRSmZZiG1Uu3nbnP7b4lgrA/bCku6C0Wligwqurvtpq6+nFHA==}
+  /turbo-linux-arm64@2.0.11:
+    resolution: {integrity: sha512-wLE5tl4oriTmHbuayc0ki0csaCplmVLj+uCWtecM/mfBuZgNS9ICNM9c4sB+Cfl5tlBBFeepqRNgvRvn8WeVZg==}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-64@2.0.9:
-    resolution: {integrity: sha512-ZVo0apxUvaRq4Vm1qhsfqKKhtRgReYlBVf9MQvVU1O9AoyydEQvLDO1ryqpXDZWpcHoFxHAQc9msjAMtE5K2lA==}
+  /turbo-windows-64@2.0.11:
+    resolution: {integrity: sha512-tja3zvVCSWu3HizOoeQv0qDJ+GeWGWRFOOM6a8i3BYnXLgGKAaDZFcjwzgC50tWiAw4aowIVR4OouwIyRhLBaQ==}
     cpu: [x64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-arm64@2.0.9:
-    resolution: {integrity: sha512-sGRz7c5Pey6y7y9OKi8ypbWNuIRPF9y8xcMqL56OZifSUSo+X2EOsOleR9MKxQXVaqHPGOUKWsE6y8hxBi9pag==}
+  /turbo-windows-arm64@2.0.11:
+    resolution: {integrity: sha512-sYjXP6k94Bqh99R+y3M1Ks6LRIEZybMz+7enA8GKl6JJ2ZFaXxTnS6q+/2+ii1+rRwxohj5OBb4gxODcF8Jd4w==}
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo@2.0.9:
-    resolution: {integrity: sha512-QaLaUL1CqblSKKPgLrFW3lZWkWG4pGBQNW+q1ScJB5v1D/nFWtsrD/yZljW/bdawg90ihi4/ftQJ3h6fz1FamA==}
+  /turbo@2.0.11:
+    resolution: {integrity: sha512-imDlFFAvitbCm1JtDFJ6eG882qwxHUmVT2noPb3p2jq5o5DuXOchMbkVS9kUeC3/4WpY5N0GBZ3RvqNyjHZw1Q==}
     hasBin: true
     optionalDependencies:
-      turbo-darwin-64: 2.0.9
-      turbo-darwin-arm64: 2.0.9
-      turbo-linux-64: 2.0.9
-      turbo-linux-arm64: 2.0.9
-      turbo-windows-64: 2.0.9
-      turbo-windows-arm64: 2.0.9
+      turbo-darwin-64: 2.0.11
+      turbo-darwin-arm64: 2.0.11
+      turbo-linux-64: 2.0.11
+      turbo-linux-arm64: 2.0.11
+      turbo-windows-64: 2.0.11
+      turbo-windows-arm64: 2.0.11
     dev: true
 
   /type-check@0.3.2:
@@ -17838,6 +17988,85 @@ packages:
       mkdirp: 2.1.6
       pg: 8.12.0
       reflect-metadata: 0.1.14
+      sha.js: 2.4.11
+      tslib: 2.6.3
+      uuid: 9.0.1
+      yargs: 17.7.2
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /typeorm@0.3.20(ioredis@5.4.1)(pg@8.12.0):
+    resolution: {integrity: sha512-sJ0T08dV5eoZroaq9uPKBoNcGslHBR4E4y+EBHs//SiGbblGe7IeduP/IH4ddCcj0qp3PHwDwGnuvqEAnKlq/Q==}
+    engines: {node: '>=16.13.0'}
+    hasBin: true
+    peerDependencies:
+      '@google-cloud/spanner': ^5.18.0
+      '@sap/hana-client': ^2.12.25
+      better-sqlite3: ^7.1.2 || ^8.0.0 || ^9.0.0
+      hdb-pool: ^0.1.6
+      ioredis: ^5.0.4
+      mongodb: ^5.8.0
+      mssql: ^9.1.1 || ^10.0.1
+      mysql2: ^2.2.5 || ^3.0.1
+      oracledb: ^6.3.0
+      pg: ^8.5.1
+      pg-native: ^3.0.0
+      pg-query-stream: ^4.0.0
+      redis: ^3.1.1 || ^4.0.0
+      sql.js: ^1.4.0
+      sqlite3: ^5.0.3
+      ts-node: ^10.7.0
+      typeorm-aurora-data-api-driver: ^2.0.0
+    peerDependenciesMeta:
+      '@google-cloud/spanner':
+        optional: true
+      '@sap/hana-client':
+        optional: true
+      better-sqlite3:
+        optional: true
+      hdb-pool:
+        optional: true
+      ioredis:
+        optional: true
+      mongodb:
+        optional: true
+      mssql:
+        optional: true
+      mysql2:
+        optional: true
+      oracledb:
+        optional: true
+      pg:
+        optional: true
+      pg-native:
+        optional: true
+      pg-query-stream:
+        optional: true
+      redis:
+        optional: true
+      sql.js:
+        optional: true
+      sqlite3:
+        optional: true
+      ts-node:
+        optional: true
+      typeorm-aurora-data-api-driver:
+        optional: true
+    dependencies:
+      '@sqltools/formatter': 1.2.5
+      app-root-path: 3.1.0
+      buffer: 6.0.3
+      chalk: 4.1.2
+      cli-highlight: 2.1.11
+      dayjs: 1.11.12
+      debug: 4.3.6(supports-color@8.1.1)
+      dotenv: 16.4.5
+      glob: 7.2.3
+      ioredis: 5.4.1
+      mkdirp: 2.1.6
+      pg: 8.12.0
+      reflect-metadata: 0.2.2
       sha.js: 2.4.11
       tslib: 2.6.3
       uuid: 9.0.1
@@ -18065,20 +18294,20 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
-  /vue@3.4.34(typescript@5.5.4):
-    resolution: {integrity: sha512-VZze05HWlA3ItreQ/ka7Sx7PoD0/3St8FEiSlSTVgb6l4hL+RjtP2/8g5WQBzZgyf8WG2f+g1bXzC7zggLhAJA==}
+  /vue@3.4.35(typescript@4.9.5):
+    resolution: {integrity: sha512-+fl/GLmI4GPileHftVlCdB7fUL4aziPcqTudpTGXCT8s+iZWuOCeNEB5haX6Uz2IpRrbEXOgIFbe+XciCuGbNQ==}
     peerDependencies:
       typescript: '*'
     peerDependenciesMeta:
       typescript:
         optional: true
     dependencies:
-      '@vue/compiler-dom': 3.4.34
-      '@vue/compiler-sfc': 3.4.34
-      '@vue/runtime-dom': 3.4.34
-      '@vue/server-renderer': 3.4.34(vue@3.4.34)
-      '@vue/shared': 3.4.34
-      typescript: 5.5.4
+      '@vue/compiler-dom': 3.4.35
+      '@vue/compiler-sfc': 3.4.35
+      '@vue/runtime-dom': 3.4.35
+      '@vue/server-renderer': 3.4.35(vue@3.4.35)
+      '@vue/shared': 3.4.35
+      typescript: 4.9.5
     dev: false
 
   /w3c-hr-time@1.0.2:

@@ -6,8 +6,9 @@ import { generateId, generateObject } from "ai";
 
 import { z } from "zod";
 
-import { ChatBotMessage, ChatBotSpinnerMessage, ChatBotStreamMessage, ChatBotShowProductMessage } from "medusa-ui-sepia/ui";
+import { ChatBotMessage, ChatBotSpinnerMessage, ChatBotStreamMessage, ChatBotShowProductMessage, ChatOrderStatus } from "medusa-ui-sepia/ui";
 import { Embeddings } from "../embeddings";
+import { retrieveLookupOrder, retrieveOrder } from "../../medusajs/data";
 
 export async function submitUserMessage(content: string) {
   "use server";
@@ -39,6 +40,8 @@ export async function submitUserMessage(content: string) {
 - Product Information: Always use the 'showClothesInformation' tool to provide detailed information about clothing items. Do not discuss specific product details without using this tool.
 
 - Inadequate Information: If a user provides insufficient information about what they want to buy, start by asking for the most essential details, such as the type of clothing item they are looking for. If the user does not specify a color or size, you can proceed without them unless they are crucial for narrowing down options. Only ask for additional details like color or size if the user explicitly mentions they are important or if they want specific recommendations. Avoid asking for every parameter and prioritize the user’s preferences based on the provided information.
+
+- Order Status Information: Always use the 'showOrderInformation' tool to provide detail informacion about order status. If the user does not provider de order id and the email, you need to ask for them before to use this tool. If the user does not provide both, you need to explain than you cannot help him.
 
 - Store-Focused: Remind users that your expertise is specific to the clothing store, and gently steer the conversation back to relevant topics if it veers off-course."`,
 
@@ -79,6 +82,29 @@ export async function submitUserMessage(content: string) {
     },
 
     tools: {
+      showOrderInformation: {
+        description: "Show information about the state of a order of the client",
+        parameters: z.object({
+          id: z.number().describe("Order number"),
+          email: z.string().describe("Client email"),
+        }),
+        generate: async function* ({ id, email }) {
+          yield <ChatBotSpinnerMessage />;
+
+          const order = await retrieveLookupOrder(id, email);
+
+          if (!order) {
+            return <ChatBotMessage>Sorry, we cannot found any order with that id</ChatBotMessage>;
+          }
+
+          return (
+            <div className="flex flex-col gap-4">
+              <ChatOrderStatus order={order} />
+              <ChatBotMessage>That is the status of your order, you need something else?</ChatBotMessage>
+            </div>
+          );
+        },
+      },
       showClothesInformation: {
         description: "Show the piece of clothes selected to the user. Always use this tool to tell the piece of clothes to the user.",
         parameters: z.object({

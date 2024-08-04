@@ -11,7 +11,7 @@ export default defineConfig([
     banner: {
       js: "'use client'",
     },
-    external: ["react", /medusa-ui-sepia/],
+    external: ["react", /medusa-ui-sepia/, "@medusajs/medusa", "@medusajs/medusa-js"],
   },
   {
     clean: true,
@@ -20,6 +20,6 @@ export default defineConfig([
     entry: ["src/rsc/index.ts"],
     outDir: "dist/rsc",
     format: ["cjs", "esm"],
-    external: ["react", /medusa-ui-sepia/],
+    external: ["react", /medusa-ui-sepia/, "@medusajs/medusa", "@medusajs/medusa-js"],
   },
 ]);
