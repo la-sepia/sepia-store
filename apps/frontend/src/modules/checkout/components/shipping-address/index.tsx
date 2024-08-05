@@ -4,7 +4,7 @@ import Checkbox from "@modules/common/components/checkbox"
 import Input from "@modules/common/components/input"
 import AddressSelect from "../address-select"
 import CountrySelect from "../country-select"
-import { Container } from "@medusajs/ui"
+import { Alert, Container } from "@medusajs/ui"
 
 const ShippingAddress = ({
   customer,
@@ -76,6 +76,12 @@ const ShippingAddress = ({
 
   return (
     <>
+      <Alert variant="warning" className="mb-4">
+        Please note, this is a demo, so don’t enter any real data. You can place
+        an order and check its status by providing the order ID and email to the
+        bot.
+      </Alert>
+
       {customer && (addressesInRegion?.length || 0) > 0 && (
         <Container className="mb-6 flex flex-col gap-y-4 p-5">
           <p className="text-small-regular">
