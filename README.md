@@ -1,5 +1,18 @@
 # Sepia Store
 
+## Demo
+
+### Check order 
+
+The bot can help you to see the status of a previous order. You need to specify the order id and the email. For the demo web you can use the email `john@example.com` and the orders 1, 2 or 3.
+
+<div align="center">
+  
+https://github.com/user-attachments/assets/a1859b72-076a-4f12-9a52-1f4823e16d05
+
+</div>
+
+
 ## Installation
 
 ### Install dependencies
