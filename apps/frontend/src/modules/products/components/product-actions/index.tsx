@@ -56,7 +56,7 @@ export default function ProductActions({
     }
 
     setOptions(optionObj)
-  }, [product])
+  }, [product, searchParams])
 
   useEffect(() => {
     const parameters = new URLSearchParams()
@@ -66,7 +66,7 @@ export default function ProductActions({
     }
 
     router.replace(`${pathname}?${parameters.toString()}`)
-  }, [options])
+  }, [options, pathname, product.options, router])
 
   // memoized record of the product's variants
   const variantRecord = useMemo(() => {

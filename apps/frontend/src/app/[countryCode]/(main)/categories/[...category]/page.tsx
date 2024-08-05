@@ -26,7 +26,7 @@ export async function generateStaticParams() {
 
   const categoryHandles = product_categories.map((category) => category.handle)
 
-  const staticParams = countryCodes
+  const staticParams = (countryCodes ?? [])
     ?.map((countryCode) =>
       categoryHandles.map((handle) => ({
         countryCode,

@@ -17,8 +17,6 @@ type Props = {
   }
 }
 
-export const PRODUCT_LIMIT = 12
-
 export async function generateStaticParams() {
   const { collections } = await getCollectionsList()
 
@@ -32,7 +30,7 @@ export async function generateStaticParams() {
 
   const collectionHandles = collections.map((collection) => collection.handle)
 
-  const staticParams = countryCodes
+  const staticParams = (countryCodes ?? [])
     ?.map((countryCode) =>
       collectionHandles.map((handle) => ({
         countryCode,

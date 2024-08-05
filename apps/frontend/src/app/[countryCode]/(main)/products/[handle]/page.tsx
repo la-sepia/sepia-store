@@ -21,7 +21,7 @@ export async function generateStaticParams() {
   )
 
   if (!countryCodes) {
-    return null
+    return []
   }
 
   const products = await Promise.all(
@@ -32,7 +32,7 @@ export async function generateStaticParams() {
     responses.map(({ response }) => response.products).flat()
   )
 
-  const staticParams = countryCodes
+  const staticParams = (countryCodes ?? [])
     ?.map((countryCode) =>
       products.map((product) => ({
         countryCode,

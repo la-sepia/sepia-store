@@ -1,4 +1,4 @@
-import { Embeddings } from "medusa-ui-sepia";
+import { Embeddings } from "medusa-ui-sepia/rsc";
 
 async function main() {
   const embbedings = await Embeddings.create(process.env.DATABASE_URL!, process.env.OPENAI_API_KEY!);
