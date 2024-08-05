@@ -1,44 +1,52 @@
-"use server";
+'use server'
 
-import { createStreamableUI, getMutableAIState } from "ai/rsc";
-import { AI } from "..";
-import { ChatBotMessage, ChatCarousel } from "medusa-ui-sepia/ui";
-import { generateId } from "ai";
+import { createStreamableUI, getMutableAIState } from 'ai/rsc'
+import { AI } from '..'
+import { ChatBotMessage, ChatCarousel } from 'medusa-ui-sepia/ui'
+import { generateId } from 'ai'
 
 export interface CartUpdateEvent {
-  productId: string;
-  countryCode: string;
+  productId: string
+  countryCode: string
 }
 
 export async function submitCardUpdated(event: CartUpdateEvent) {
-  "use server";
+  'use server'
 
-  const aiState = getMutableAIState<typeof AI>();
-  const message = createStreamableUI(null);
+  const aiState = getMutableAIState<typeof AI>()
+  const message = createStreamableUI(null)
 
-  const products = await getProducts(event.productId);
+  const products = await getProducts(event.productId)
 
-  message.append(<ChatCarousel slides={products} />);
-  message.append(<ChatBotMessage>Great choice! You might also like these related products. Interested?</ChatBotMessage>);
+  message.append(
+    <div className="flex flex-col gap-y-4">
+      <ChatCarousel slides={products} />
+      <ChatBotMessage>
+        Great choice! You might also like these related products. Interested?
+      </ChatBotMessage>
+    </div>
+  )
 
-  message.done();
+  message.done()
 
   return {
     message: {
       id: generateId(),
       display: message.value,
     },
-  };
+  }
 }
 
 async function getProducts(excludeId: string) {
-  const response = await fetch("http://localhost:9000/store/products?fields=thumbnail");
+  const response = await fetch('http://localhost:9000/store/products?fields=thumbnail')
 
   if (!response.ok) {
-    return [];
+    return []
   }
 
-  const { products } = (await response.json()) as { products: { id: string; thumbnail: string; handle: string }[] };
+  const { products } = (await response.json()) as {
+    products: { id: string; thumbnail: string; handle: string }[]
+  }
 
-  return products.filter(({ id }) => id !== excludeId);
+  return products.filter(({ id }) => id !== excludeId)
 }
