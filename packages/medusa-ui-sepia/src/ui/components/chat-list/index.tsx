@@ -13,9 +13,9 @@ export const ChatList = ({ messages }: ChatList) => {
         maxHeight: "500px",
       }}
     >
-      {messages
-        ?.toReversed()
-        .map((message) => <div key={message.id}>{message.display}</div>)}
+      {[...(messages ?? [])].reverse().map((message) => (
+        <div key={message.id}>{message.display}</div>
+      ))}
     </div>
   );
 };
