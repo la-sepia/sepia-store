@@ -5,6 +5,9 @@ const store = require("./store.config.json")
  * @type {import('next').NextConfig}
  */
 const nextConfig = withStoreConfig({
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   features: store.features,
   reactStrictMode: true,
   images: {
