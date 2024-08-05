@@ -51,3 +51,16 @@ export async function getCart(cartId: string): Promise<StoreCartsRes["cart"] | n
       return null;
     });
 }
+
+export async function retrieveAvailableProducts(): Promise<string[]> {
+  return medusaClient.products.list()
+    .then(({ products }) =>
+      products
+        .map(product => product.title)
+        .filter((title): title is string => title !== undefined)
+    )
+    .catch((error) => {
+      console.error("Error retrieving products:", error);
+      return [];
+    });
+}

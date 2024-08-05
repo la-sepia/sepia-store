@@ -8,11 +8,13 @@ import { z } from "zod";
 
 import { ChatBotMessage, ChatBotSpinnerMessage, ChatBotStreamMessage, ChatBotShowProductMessage, ChatOrderStatus } from "medusa-ui-sepia/ui";
 import { Embeddings } from "../embeddings";
-import { getCart, retrieveLookupOrder, retrieveOrder } from "../../medusajs/data";
+import { getCart, retrieveAvailableProducts, retrieveLookupOrder } from "../../medusajs/data";
 import { cookies } from "next/headers";
 
 export async function submitUserMessage(content: string) {
   "use server";
+
+  const storeAvailableProducts = await retrieveAvailableProducts();
 
   const embbedings = await Embeddings.create(process.env.DATABASE_URL!, process.env.OPENAI_API_KEY!);
 
@@ -37,6 +39,8 @@ export async function submitUserMessage(content: string) {
     system: `"You are a helpful assistant specialized in a clothing store. Your primary role is to assist customers with questions about products and help them find what they're looking for.
 
 - General Interaction: You can greet users, respond to common pleasantries, and ensure a friendly interaction. If a user asks a question unrelated to the store's products or services, politely inform them that you can only assist with clothing-related inquiries.
+
+- The only products available in the store are the following: ${JSON.stringify(storeAvailableProducts)}. If a customer asks about available products, you don't need to list them all. However, it would be good to explain what is generally sold, the possible categories, etc. The most important thing is to never mention or suggest a product/category that is not available. 
 
 - Product Information: Always use the 'showClothesInformation' tool to provide detailed information about clothing items. Do not discuss specific product details without using this tool.
 
