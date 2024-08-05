@@ -45,7 +45,7 @@ export const ChatCarousel = ({
       <div className="absolute bottom-4 right-0 left-0">
         <div className="flex items-center justify-center gap-2">
           {slides.map((s, i) => (
-            <div key={i} className={`transition-all w-1.5 h-1.5 bg-white rounded-full  ${curr === i ? "p-0.5" : "bg-opacity-50"}`} />
+            <div key={i} className={`transition-all w-1.5 h-1.5 bg-slate-500 rounded-full  ${curr === i ? "p-0.5" : "bg-opacity-50"}`} />
           ))}
         </div>
       </div>
