@@ -6,7 +6,7 @@ import { generateId, generateObject } from "ai";
 
 import { z } from "zod";
 
-import { ChatBotMessage, ChatBotSpinnerMessage, ChatBotStreamMessage, ChatBotShowProductMessage, ChatOrderStatus } from "medusa-ui-sepia/ui";
+import { ChatBotMessage, ChatBotSpinnerMessage, ChatBotStreamMessage, ChatBotShowProductMessage, ChatOrderStatus, ChatCartStatus } from "medusa-ui-sepia/ui";
 import { Embeddings } from "../embeddings";
 import { getCart, retrieveAvailableProducts, retrieveLookupOrder } from "../../medusajs/data";
 import { cookies } from "next/headers";
@@ -102,13 +102,16 @@ export async function submitUserMessage(content: string) {
 
           const cart = await getCart(cartId);
 
-          if (!cart) {
+          if (!cart || cart.items.length === 0) {
             return <ChatBotMessage>Your cart is currently empty :(</ChatBotMessage>;
           }
 
-          const total = cart.items.reduce((accumulator, current) => accumulator + (current.total ?? 0), 0) / 100;
-
-          return <ChatBotMessage>Your cart price is {total.toFixed(2)}$</ChatBotMessage>;
+          return (
+            <div className="flex flex-col gap-4">
+              <ChatBotMessage>Sure, this is your cart.</ChatBotMessage>
+              <ChatCartStatus cart={cart} />
+            </div>
+          );
         },
       },
       showOrderInformation: {

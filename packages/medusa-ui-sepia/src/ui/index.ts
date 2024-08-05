@@ -1,6 +1,7 @@
 export { Chat } from "./components/chat";
 export { ChatBotMessage, ChatBotSpinnerMessage, ChatBotStreamMessage, ChatBotShowProductMessage } from "./components/chat-bot-message";
 export { ChatCarousel } from "./components/chat-carousel";
+export { ChatCartStatus } from "./components/chat-cart-status";
 export { ChatList } from "./components/chat-list";
 export { ChatModal } from "./components/chat-modal";
 export { ChatOrderStatus } from "./components/chat-order-status";
