@@ -28,7 +28,7 @@ export const ChatCarousel = ({
   }, []);
 
   return (
-    <div className="overflow-hidden relative">
+    <div className="overflow-hidden relative w-[354px] self-center">
       <div className="flex transition-transform ease-out duration-500" style={{ transform: `translateX(-${curr * 100}%)` }}>
         {slides.map((slide) => (
           <Image width={354} height={300} alt={slide.id} src={slide.thumbnail} />
