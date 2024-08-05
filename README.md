@@ -2,13 +2,28 @@
 
 ## Demo
 
-### Check order 
+### Shopping assistant
 
-The bot can help you to see the status of a previous order. You need to specify the order id and the email. For the demo web you can use the email `john@example.com` and the orders 1, 2 or 3.
+The bot can help you to find the right product, color and size. Just ask for it!
+
+Click in the next image to see a demo:
 
 <div align="center">
-  
-https://github.com/user-attachments/assets/a1859b72-076a-4f12-9a52-1f4823e16d05
+
+[![Shopping assistant](https://img.youtube.com/vi/LFEo_UOD3dg/0.jpg)](https://www.youtube.com/watch?v=LFEo_UOD3dg)
+
+</div>
+
+
+### Check order 
+
+The bot can help you to see the status of a previous order. You need to specify the order id and the email. For the demo web you can use the email `john@example.com` and the orders 1, 2 or 3. 
+
+Click in the next image to see a demo:
+
+<div align="center">
+
+[![Check an order status](https://img.youtube.com/vi/Cg9DeOO7rPk/0.jpg)](https://www.youtube.com/watch?v=Cg9DeOO7rPk)
 
 </div>
 
