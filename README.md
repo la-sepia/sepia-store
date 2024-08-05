@@ -14,6 +14,18 @@ Click in the next image to see a demo:
 
 </div>
 
+### Cart status
+
+The bot can show you the cart status.
+
+Click in the next image to see a demo:
+
+<div align="center">
+
+[![Cart status](https://img.youtube.com/vi/-ntKVHR39H8/0.jpg)](https://www.youtube.com/watch?v=-ntKVHR39H8)
+
+</div>
+
 
 ### Check order 
 
