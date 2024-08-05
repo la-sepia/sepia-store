@@ -1,5 +1,16 @@
 # Sepia Store
 
+## What is Sepia?
+
+Sepia is a plugin for MedusaJS, an open-source e-commerce framework that provides a flexible and scalable backend for building online stores. Sepia integrates with the Vercel AI SDK to add a chatbot to the MedusaJS Next.js store. This chatbot can assist with personal shopping, find order statuses, and display cart information. While Sepia is just a proof of concept (PoC), it showcases the potential of using the Vercel AI SDK to create innovative products with open-source e-commerce solutions for various businesses.
+
+Sepia leverages the following features from the Vercel AI SDK:
+
+*	From the AI SDK Core: Generating text, tool callings, embeddings generation
+* From the AI SDK SRC: Streaming React components
+
+The bot dynamically creates an embedding database from the products in the MedusaJS store, allowing it to recommend the right products based on client requirements using RAG. Additionally, it uses the MedusaJS API to check the status of the cart and orders. Although it’s a PoC, Sepia demonstrates the numerous possibilities that can be explored with these technologies.
+
 ## Demo
 
 ### Shopping assistant
@@ -97,3 +108,13 @@ pnpm run dev
 - Backend: http://localhost:7001/
   - Username: `admin@example.com`
   - Password: `admin`
+
+
+## Who we are
+
+* [Adrián López](https://github.com/AdrianLopezGue)
+* [Antonio Moruno](https://github.com/moruno21)
+* [Guillermo Cosano](https://github.com/guillecg98)
+* [Javier de Santiago](https://github.com/jdes01)
+* [Sergio Gómez](https://github.com/sgomez)
+* [Victor Monserrat](https://github.com/victormonserrat/)
