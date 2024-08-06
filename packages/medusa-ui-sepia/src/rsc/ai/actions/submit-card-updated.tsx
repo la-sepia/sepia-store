@@ -19,6 +19,19 @@ export async function submitCardUpdated(event: CartUpdateEvent) {
 
   const products = await getProducts(event.productId);
 
+  aiState.done({
+    ...aiState.get(),
+    messages: [
+      ...aiState.get().messages,
+
+      {
+        id: generateId(),
+        role: "system",
+        content: `[User added the next product id to the cart: ${event.productId}]`,
+      },
+    ],
+  });
+
   message.append(
     <div className="flex flex-col gap-y-4">
       <ChatCarousel slides={products} />

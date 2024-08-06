@@ -10,6 +10,7 @@ import { ChatBotMessage, ChatBotSpinnerMessage, ChatBotStreamMessage, ChatBotSho
 import { Embeddings } from "../embeddings";
 import { getCart, retrieveAvailableProducts, retrieveLookupOrder } from "../../medusajs/data";
 import { cookies } from "next/headers";
+import { StoreCartsRes } from "@medusajs/medusa";
 
 export async function submitUserMessage(content: string) {
   "use server";
@@ -38,13 +39,16 @@ export async function submitUserMessage(content: string) {
   const result = await streamUI({
     system: `"You are a helpful assistant specialized in a clothing store. Your primary role is to assist customers with questions about products and help them find what they're looking for.
 
+Messages inside [] means that it's a UI element or a user event. For example:
+  - "[User selected a valid order]" means that the user has asked for a valir order.
+    
 - General Interaction: You can greet users, respond to common pleasantries, and ensure a friendly interaction. If a user asks a question unrelated to the store's products or services, politely inform them that you can only assist with clothing-related inquiries.
 
 - The only products available in the store are the following: ${JSON.stringify(storeAvailableProducts)}. If a customer asks about available products, you don't need to list them all. However, it would be good to explain what is generally sold, the possible categories, etc. The most important thing is to never mention or suggest a product/category that is not available. 
 
 - Product Information: Always use the 'showClothesInformation' tool to provide detailed information about clothing items. Do not discuss specific product details without using this tool.
 
-- Inadequate Information: If a user provides insufficient information about what they want to buy, start by asking for the most essential details, such as the type of clothing item they are looking for. If the user does not specify a color or size, you can proceed without them unless they are crucial for narrowing down options. Only ask for additional details like color or size if the user explicitly mentions they are important or if they want specific recommendations. Avoid asking for every parameter and prioritize the user’s preferences based on the provided information.
+- Inadequate Information: If a user provides insufficient information about what they want to buy, start by asking for the most essential details, such as the type of clothing item they are looking for. If the user does not specify a color or size, you can proceed without them unless they are crucial for narrowing down options. Only ask for additional details like color or size if the user explicitly mentions they are important or if they want specific recommendations. Avoid asking for every parameter and prioritize the user’s preferences based on the provided information. Remember the user preferences and try not to ask again the same color and size questions.
 
 - Order Status Information: Always use the 'showOrderInformation' tool to provide detail informacion about order status. If the user does not provider de order id and the email, you need to ask for them before to use this tool. If the user does not provide both, you need to explain than you cannot help him.
 
@@ -93,18 +97,83 @@ export async function submitUserMessage(content: string) {
         description: "Show information about the state of the cart",
         parameters: z.object({}),
         generate: async function* ({}) {
+          const toolCallId = generateId();
           yield <ChatBotSpinnerMessage />;
+
           const cartId = cookies().get("_medusa_cart_id")?.value;
+          let cart: StoreCartsRes["cart"] | undefined | null;
 
-          if (!cartId) {
-            return <ChatBotMessage>Your cart is currently empty :(</ChatBotMessage>;
+          if (cartId) {
+            cart = await getCart(cartId);
           }
-
-          const cart = await getCart(cartId);
 
           if (!cart || cart.items.length === 0) {
+            aiState.done({
+              ...aiState.get(),
+              messages: [
+                ...aiState.get().messages,
+                {
+                  id: generateId(),
+                  role: "assistant",
+                  content: [
+                    {
+                      type: "tool-call",
+                      toolName: "showCartInformation",
+                      toolCallId,
+                    },
+                  ],
+                },
+                {
+                  id: generateId(),
+                  role: "tool",
+                  content: [
+                    {
+                      type: "tool-result",
+                      toolName: "showCartInformation",
+                      toolCallId,
+                      result: {
+                        status: "cart is empty",
+                      },
+                    },
+                  ],
+                },
+              ],
+            });
+
             return <ChatBotMessage>Your cart is currently empty :(</ChatBotMessage>;
           }
+
+          aiState.done({
+            ...aiState.get(),
+            messages: [
+              ...aiState.get().messages,
+              {
+                id: generateId(),
+                role: "assistant",
+                content: [
+                  {
+                    type: "tool-call",
+                    toolName: "showCartInformation",
+                    toolCallId,
+                  },
+                ],
+              },
+              {
+                id: generateId(),
+                role: "tool",
+                content: [
+                  {
+                    type: "tool-result",
+                    toolName: "showCartInformation",
+                    toolCallId,
+                    result: {
+                      cart,
+                    },
+                  },
+                ],
+              },
+            ],
+          });
 
           return (
             <div className="flex flex-col gap-4">
@@ -121,13 +190,92 @@ export async function submitUserMessage(content: string) {
           email: z.string().describe("Client email"),
         }),
         generate: async function* ({ id, email }) {
+          const toolCallId = generateId();
+
           yield <ChatBotSpinnerMessage />;
 
           const order = await retrieveLookupOrder(id, email);
 
           if (!order) {
+            aiState.done({
+              ...aiState.get(),
+              messages: [
+                ...aiState.get().messages,
+                {
+                  id: generateId(),
+                  role: "assistant",
+                  content: [
+                    {
+                      type: "tool-call",
+                      toolName: "showOrderInformation",
+                      toolCallId,
+                      args: { id, email },
+                    },
+                  ],
+                },
+                {
+                  id: generateId(),
+                  role: "tool",
+                  content: [
+                    {
+                      type: "tool-result",
+                      toolName: "showOrderInformation",
+                      toolCallId,
+                      result: {
+                        status: "not found",
+                      },
+                    },
+                  ],
+                },
+                {
+                  id: generateId(),
+                  role: "system",
+                  content: `[User has select a invalid order]`,
+                },
+              ],
+            });
+
             return <ChatBotMessage>Sorry, we cannot found any order with that id</ChatBotMessage>;
           }
+
+          aiState.done({
+            ...aiState.get(),
+            messages: [
+              ...aiState.get().messages,
+              {
+                id: generateId(),
+                role: "assistant",
+                content: [
+                  {
+                    type: "tool-call",
+                    toolName: "showOrderInformation",
+                    toolCallId,
+                    args: { id, email },
+                  },
+                ],
+              },
+              {
+                id: generateId(),
+                role: "tool",
+                content: [
+                  {
+                    type: "tool-result",
+                    toolName: "showOrderInformation",
+                    toolCallId,
+                    result: {
+                      order,
+                      status: "found",
+                    },
+                  },
+                ],
+              },
+              {
+                id: generateId(),
+                role: "system",
+                content: `[User has select a valid order]`,
+              },
+            ],
+          });
 
           return (
             <div className="flex flex-col gap-4">
@@ -148,6 +296,8 @@ export async function submitUserMessage(content: string) {
           item: z.string().describe("Generate a brief description of the clothing item or any other specific preferences, up to one sentence long."),
         }),
         generate: async function* (clothing) {
+          const toolCallId = generateId();
+
           yield <ChatBotSpinnerMessage />;
 
           const query = JSON.stringify(clothing);
@@ -210,6 +360,39 @@ ${data
             });
 
             console.debug("result", result.object);
+
+            aiState.done({
+              ...aiState.get(),
+              messages: [
+                ...aiState.get().messages,
+                {
+                  id: generateId(),
+                  role: "assistant",
+                  content: [
+                    {
+                      type: "tool-call",
+                      toolName: "showClothesInformation",
+                      toolCallId,
+                      args: { clothing },
+                    },
+                  ],
+                },
+                {
+                  id: generateId(),
+                  role: "tool",
+                  content: [
+                    {
+                      type: "tool-result",
+                      toolName: "showClothesInformation",
+                      toolCallId,
+                      result: {
+                        ...result.object,
+                      },
+                    },
+                  ],
+                },
+              ],
+            });
 
             if (result.object.inStock === false) {
               const {
