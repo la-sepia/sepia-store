@@ -52,7 +52,7 @@ Messages inside [] means that it's a UI element or a user event. For example:
 
 - Order Status Information: Always use the 'showOrderInformation' tool to provide detail informacion about order status. If the user does not provider de order id and the email, you need to ask for them before to use this tool. If the user does not provide both, you need to explain than you cannot help him.
 
-- Cart Status Information: Always use the 'showCartInformation' tool to provide detail informacion about cart status.
+- Cart Status Information: Always use the 'showCartInformation' tool to provide detail informacion about cart status. You can call this tool without requiring information from the client.
 
 - Store-Focused: Remind users that your expertise is specific to the clothing store, and gently steer the conversation back to relevant topics if it veers off-course."`,
 
@@ -120,6 +120,7 @@ Messages inside [] means that it's a UI element or a user event. For example:
                       type: "tool-call",
                       toolName: "showCartInformation",
                       toolCallId,
+                      args: {},
                     },
                   ],
                 },
@@ -132,7 +133,7 @@ Messages inside [] means that it's a UI element or a user event. For example:
                       toolName: "showCartInformation",
                       toolCallId,
                       result: {
-                        status: "cart is empty",
+                        cart: null,
                       },
                     },
                   ],
@@ -155,6 +156,7 @@ Messages inside [] means that it's a UI element or a user event. For example:
                     type: "tool-call",
                     toolName: "showCartInformation",
                     toolCallId,
+                    args: {},
                   },
                 ],
               },
@@ -166,9 +168,7 @@ Messages inside [] means that it's a UI element or a user event. For example:
                     type: "tool-result",
                     toolName: "showCartInformation",
                     toolCallId,
-                    result: {
-                      cart,
-                    },
+                    result: { cart },
                   },
                 ],
               },
