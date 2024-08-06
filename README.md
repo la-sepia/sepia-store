@@ -25,6 +25,12 @@ The project is divided into two plugins:
 
 You can see a demo in [https://sepia.sgomez.me/](https://sepia.sgomez.me/)
 
+<div align="center">
+
+[![Shopping assistant](https://img.youtube.com/vi/hEkpMkJnuSE/0.jpg)](https://www.youtube.com/watch?v=hEkpMkJnuSE)
+
+</div>
+
 ### Shopping assistant
 
 The bot can help you to find the right product, color and size. Just ask for it!
