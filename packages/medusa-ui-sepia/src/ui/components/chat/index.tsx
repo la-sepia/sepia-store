@@ -7,7 +7,7 @@ export const Chat = () => {
 
   return (
     <>
-      <ChatToggleButton handleButton={() => setIsOpen(!isOpen)} />
+      <ChatToggleButton isOpen={isOpen} handleButton={() => setIsOpen(!isOpen)} />
       <ChatModal isOpen={isOpen} />
     </>
   );
