@@ -5,16 +5,9 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "@medusajs/icons";
 import Image from "next/image";
+import { PricedProduct } from "@medusajs/medusa/dist/types/pricing";
 
-export const ChatCarousel = ({
-  slides,
-  autoSlide = false,
-  autoSlideInterval = 3000,
-}: {
-  slides: { id: string; thumbnail: string; handle: string }[];
-  autoSlide?: boolean;
-  autoSlideInterval?: number;
-}) => {
+export const ChatCarousel = ({ slides, autoSlide = false, autoSlideInterval = 3000 }: { slides: PricedProduct[]; autoSlide?: boolean; autoSlideInterval?: number }) => {
   const [curr, setCurr] = useState(0);
 
   const prev = () => setCurr((curr) => (curr === 0 ? slides.length - 1 : curr - 1));
@@ -31,7 +24,7 @@ export const ChatCarousel = ({
     <div className="overflow-hidden relative w-[354px] self-center">
       <div className="flex transition-transform ease-out duration-500" style={{ transform: `translateX(-${curr * 100}%)` }}>
         {slides.map((slide) => (
-          <Image width={354} height={300} alt={slide.id} src={slide.thumbnail} />
+          <Image width={354} height={300} alt={slide.id as string} src={slide.thumbnail as string} />
         ))}
       </div>
       <div className="absolute inset-0 flex items-center justify-between p-4">
