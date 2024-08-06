@@ -11,6 +11,16 @@ Sepia leverages the following features from the Vercel AI SDK:
 
 The bot dynamically creates an embedding database from the products in the MedusaJS store, allowing it to recommend the right products based on client requirements using RAG. Additionally, it uses the MedusaJS API to check the status of the cart and orders. Although it’s a PoC, Sepia demonstrates the numerous possibilities that can be explored with these technologies.
 
+The project is divided into two plugins:
+
+1. **Backend Plugin**  
+   [Medusa Plugin Sepia](https://github.com/la-sepia/sepia-store/tree/main/packages/medusa-plugin-sepia):  
+   This plugin is for the MedusaJS backend. It is responsible for adding each product from the store to the vector database and keeping it updated.
+
+2. **Frontend Plugin**  
+   [Medusa UI Sepia](https://github.com/la-sepia/sepia-store/tree/main/packages/medusa-ui-sepia):  
+   This plugin is for the MedusaJS frontend. It adds a chat feature to the store, allowing users to interact with the API.
+
 ## Demo
 
 You can see a demo in [https://sepia.sgomez.me/](https://sepia.sgomez.me/)
